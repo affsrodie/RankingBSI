@@ -1,24 +1,35 @@
-	package GesMED.bsi.Entidades;
+package GesMED.bsi.Entidades;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Agendamento {
 	@Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int IDAgenda;
-	private String Data;
-        private String Hora;
+	@Temporal(TemporalType.DATE)
+        private Date Data;
+        @Temporal(TemporalType.TIME)
+        private Date HoraInicio;
+        @Temporal(TemporalType.TIME)
+        private Date HoraFim;
         private String Procedimento;
+        private String Convenio;
 	private String Status;
-
+        private String Observacoes;
 	
 	@ManyToOne(cascade= {CascadeType.ALL})
 	@JoinColumn(name="ATENDENTE_PK")	
@@ -38,21 +49,34 @@ public class Agendamento {
 	public void setIDAgenda(int iDAgenda) {
 		IDAgenda = iDAgenda;
 	}
-	public String getData() {
-		return Data;
-	}
-	public void setData(String data) {
-		Data = data;
-	}
+
+        public String getData() {
+            return Data.toString();
+        }
+
+        public void setData(Date Data) {
+            this.Data = Data;
+        }
+
+        public String getHoraInicio() {
+            return HoraInicio.toString();
+        }
+
+        public void setHoraInicio(Date HoraInicio) {
+            this.HoraInicio = HoraInicio;
+        }
+
+        public String getHoraFim() {
+            return HoraFim.toString();
+        }
+
+        public void setHoraFim(Date HoraFim) {
+
+            this.HoraFim = HoraFim;
+        }
+
         
-        public String getHora() {
-            return Hora;
-        }
-
-        public void setHora(String Hora) {
-            this.Hora = Hora;
-        }
-
+        
         public String getProcedimento() {
             return Procedimento;
         }
@@ -94,6 +118,22 @@ public class Agendamento {
 		this.consultas.remove(consulta);
 		
 	}
+        
+        public String getConvenio() {
+        return Convenio;
+        }
+
+        public void setConvenio(String Convenio) {
+            this.Convenio = Convenio;
+        }
+
+        public String getObservacoes() {
+            return Observacoes;
+        }
+
+        public void setObservacoes(String Observacoes) {
+            this.Observacoes = Observacoes;
+        }
 		
 
 }

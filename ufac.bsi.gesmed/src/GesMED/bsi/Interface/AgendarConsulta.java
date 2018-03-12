@@ -7,8 +7,22 @@ package GesMED.bsi.Interface;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import GesMED.bsi.Entidades.Agendamento;
+import GesMED.bsi.Entidades.Atendente;
+import GesMED.bsi.Entidades.Paciente;
+import GesMED.bsi.Repositorios.AgendamentoRepositorio;
+import GesMED.bsi.Repositorios.PacienteRepositorio;
 
 /**
  *
@@ -17,6 +31,8 @@ import javax.swing.JLabel;
 public class AgendarConsulta extends javax.swing.JFrame {
     
     private PainelPrincipal Pai;
+    private Paciente paciente = new Paciente();
+    private Atendente atendente = new Atendente();
 
     /**
      * Creates new form AgendarConsulta
@@ -67,10 +83,11 @@ public class AgendarConsulta extends javax.swing.JFrame {
         jScrollPaneObservacoes = new javax.swing.JScrollPane();
         textObservacoes = new javax.swing.JTextArea();
         lbNome = new javax.swing.JLabel();
-        tfdDas = new javax.swing.JFormattedTextField();
-        tfdAs = new javax.swing.JFormattedTextField();
         lbCPF = new javax.swing.JLabel();
         tfdCPF = new javax.swing.JFormattedTextField();
+        tfdHrFim = new javax.swing.JFormattedTextField();
+        tfdHrInicio = new javax.swing.JFormattedTextField();
+        bt_BuscarCPF = new javax.swing.JButton();
         pFinanceiro = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         lbDataLancamento = new javax.swing.JLabel();
@@ -84,8 +101,6 @@ public class AgendarConsulta extends javax.swing.JFrame {
         jcbFormaPagamento = new javax.swing.JComboBox<>();
         btn_Salvar = new javax.swing.JButton();
         btn_Sair = new javax.swing.JButton();
-        jScrollPaneObservacoes1 = new javax.swing.JScrollPane();
-        textObservacoes1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -159,13 +174,13 @@ public class AgendarConsulta extends javax.swing.JFrame {
                 .addGroup(pCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(imgTituloJanela, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pCabecalhoLayout.createSequentialGroup()
                 .addGroup(pCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Minimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Maximizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Close, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bg.add(pCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 110));
@@ -233,66 +248,87 @@ public class AgendarConsulta extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        try {
+            tfdHrFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfdHrFim.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfdHrFim.setFont(new java.awt.Font("Noto Sans", 0, 15)); // NOI18N
+
+        try {
+            tfdHrInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfdHrInicio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfdHrInicio.setFont(new java.awt.Font("Noto Sans", 0, 15)); // NOI18N
+
+        bt_BuscarCPF.setText("BUSCAR");
+        bt_BuscarCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_BuscarCPFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pAgendamentoLayout = new javax.swing.GroupLayout(pAgendamento);
         pAgendamento.setLayout(pAgendamentoLayout);
         pAgendamentoLayout.setHorizontalGroup(
             pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pAgendamentoLayout.createSequentialGroup()
-                .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pAgendamentoLayout.createSequentialGroup()
-                        .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pAgendamentoLayout.createSequentialGroup()
-                                .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pAgendamentoLayout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pAgendamentoLayout.createSequentialGroup()
-                                                .addGap(244, 244, 244)
-                                                .addComponent(lbHorarioAgenda))
-                                            .addComponent(lbDataAgenda)))
-                                    .addGroup(pAgendamentoLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lbProcedimento)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfdDataAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jcbProcedimento, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jcbConvenio, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbDas)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfdDas, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pAgendamentoLayout.createSequentialGroup()
-                                .addGap(0, 52, Short.MAX_VALUE)
+            .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(pAgendamentoLayout.createSequentialGroup()
+                    .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pAgendamentoLayout.createSequentialGroup()
+                            .addGap(70, 70, 70)
+                            .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pAgendamentoLayout.createSequentialGroup()
+                                    .addGap(244, 244, 244)
+                                    .addComponent(lbHorarioAgenda))
+                                .addComponent(lbDataAgenda)))
+                        .addGroup(pAgendamentoLayout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lbConvenio)
-                                .addGap(325, 325, 325)
-                                .addComponent(lbStatus)
-                                .addGap(84, 84, 84)))
-                        .addComponent(lbAs, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbProcedimento))
+                            .addGap(16, 16, 16)
+                            .addComponent(tfdDataAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pAgendamentoLayout.createSequentialGroup()
+                            .addGap(46, 46, 46)
+                            .addComponent(lbDas)
+                            .addGap(18, 18, 18)
+                            .addComponent(tfdHrInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(34, 34, 34)
+                            .addComponent(lbAs, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(tfdHrFim, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pAgendamentoLayout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(lbStatus)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(pAgendamentoLayout.createSequentialGroup()
+                    .addGap(15, 15, 15)
+                    .addComponent(lbObsersavacoes)
+                    .addGap(29, 29, 29)
+                    .addComponent(jScrollPaneObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(pAgendamentoLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbCPF)
+                    .addComponent(lbNome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pAgendamentoLayout.createSequentialGroup()
+                        .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfdAs, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pAgendamentoLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pAgendamentoLayout.createSequentialGroup()
-                                .addComponent(lbObsersavacoes)
-                                .addGap(29, 29, 29)
-                                .addComponent(jScrollPaneObservacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32))))
-                    .addGroup(pAgendamentoLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbCPF)
-                            .addComponent(lbNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                        .addComponent(bt_BuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbConvenio, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbProcedimento, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         pAgendamentoLayout.setVerticalGroup(
             pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,17 +341,18 @@ public class AgendarConsulta extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_BuscarCPF))
                 .addGap(18, 18, 18)
                 .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbConvenio)
-                    .addComponent(jcbConvenio, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jcbConvenio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(lbStatus)
-                    .addComponent(jcbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                    .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbProcedimento)
-                    .addComponent(jcbProcedimento, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                    .addComponent(jcbProcedimento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
                 .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDataAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,8 +360,8 @@ public class AgendarConsulta extends javax.swing.JFrame {
                     .addComponent(lbHorarioAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbAs, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdDas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdAs, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdHrFim, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdHrInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pAgendamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbObsersavacoes)
@@ -424,7 +461,12 @@ public class AgendarConsulta extends javax.swing.JFrame {
 
         btn_Salvar.setBackground(new java.awt.Color(255, 255, 255));
         btn_Salvar.setText("SALVAR");
-        bg.add(btn_Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 560, 70, 30));
+        btn_Salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalvarActionPerformed(evt);
+            }
+        });
+        bg.add(btn_Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, 100, 30));
 
         btn_Sair.setBackground(new java.awt.Color(255, 255, 255));
         btn_Sair.setText("SAIR");
@@ -433,13 +475,7 @@ public class AgendarConsulta extends javax.swing.JFrame {
                 btn_SairActionPerformed(evt);
             }
         });
-        bg.add(btn_Sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 560, 70, 30));
-
-        textObservacoes1.setColumns(20);
-        textObservacoes1.setRows(5);
-        jScrollPaneObservacoes1.setViewportView(textObservacoes1);
-
-        bg.add(jScrollPaneObservacoes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
+        bg.add(btn_Sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 560, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -486,6 +522,165 @@ public class AgendarConsulta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_SairActionPerformed
 
+    private void bt_BuscarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_BuscarCPFActionPerformed
+      
+    	buscaPorCPF();
+    	
+    	
+    }//GEN-LAST:event_bt_BuscarCPFActionPerformed
+
+    private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
+        agendarConsulta();
+    }//GEN-LAST:event_btn_SalvarActionPerformed
+
+    
+    public void buscaPorCPF() {
+    	
+    	PacienteRepositorio pr = new PacienteRepositorio();
+        List<Paciente> BuscaPaciente = pr.recuperarPacienteCPF(tfdCPF.getText());
+      	pr.encerrar();
+      	if(BuscaPaciente.size()==1) {
+      		paciente = BuscaPaciente.get(0);
+      		String Nome = paciente.getNome();
+          	tfdNome.setText(Nome);
+      	}else {
+      		JOptionPane.showMessageDialog(null, "CPF Não encontrado!");
+      	}
+    }
+    
+    
+    public void carregarCampos() {
+    	String Nome="", CPF="", Convenio="", Status="", Procedimento="", Data="", HoraInicio="", HoraFim="", Observacoes="";
+    	Nome = tfdNome.getText();
+    	CPF = tfdCPF.getText();
+    	Convenio = jcbConvenio.getSelectedItem().toString();
+    	Status = jcbStatus.getSelectedItem().toString();;
+    	Procedimento = jcbProcedimento.getSelectedItem().toString();
+    	Data = tfdDataAgenda.getText();
+    	HoraInicio = tfdHrInicio.getText();
+    	HoraFim = tfdHrFim.getText();
+    	Observacoes = textObservacoes.getText();
+    	
+    	boolean CamposValidos = true;
+    	String CamposBrancos = "";
+    	
+    	if(Nome.isEmpty()) {
+    		CamposValidos = false;
+    		CamposBrancos += "Nome";
+    	}
+    	
+    	if(CPF.equals("")) {
+    		CamposValidos = false;
+    		CamposBrancos += "CPF";
+    	}
+    	
+    	if(Convenio.equals("Selecione")) {
+    		CamposValidos = false;
+    		jcbConvenio.requestFocus();
+    	}
+    	
+    	if(Status.equals("Selecione")) {
+    		CamposValidos = false;
+    		jcbConvenio.requestFocus();
+    	}
+    	
+    	if(Procedimento.equals("Selecione")) {
+    		CamposValidos = false;
+    		jcbProcedimento.requestFocus();
+    	}
+    	
+    	if(Data.equals("  /  /    ")) {
+    		CamposValidos = false;
+    		CamposBrancos += "Data";
+    	}
+    	
+    	if (HoraInicio.equals("  :  ")) {
+    		CamposValidos = false;
+    		CamposBrancos += "Hora Incial da Consulta";
+    	}
+    	
+    	if(HoraFim.equals("  :  ")) {
+    		CamposValidos = false;
+    		CamposBrancos += "Hora Final da Consulta";
+    	}
+    	
+    	if(CamposValidos==true) {
+    		Agendamento(Procedimento, Convenio, Status, HoraInicio, HoraFim , Observacoes);
+    		LimparCampos();
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Os Seguintes Campos estão Vazios:\n"+ CamposBrancos);
+    	}
+    	
+    }
+    
+    public void LimparCampos() {
+    	tfdNome.setText("");
+    	tfdCPF.setText("");
+    	jcbConvenio.setSelectedIndex(0);
+    	jcbStatus.setSelectedIndex(0);
+    	jcbProcedimento.setSelectedIndex(0);
+    	tfdDataAgenda.setText("");
+    	tfdHrInicio.setText("");
+    	tfdHrFim.setText("");
+    	textObservacoes.setText("");
+    }
+    
+    
+    
+    public void Agendamento(String Procedimento, String Convenio, String Status, String DataInicio, String DataFim, String Observacoes) {
+    	Agendamento agenda = new Agendamento();
+        agenda.setData(setData());
+        agenda.setHoraInicio(setHora(DataInicio));
+        agenda.setHoraFim(setHora(DataFim));
+    	agenda.setProcedimento(Procedimento);
+    	agenda.setConvenio(Convenio);
+    	agenda.setStatus(Status);
+    	agenda.setObservacoes(Observacoes);
+    	if(paciente!=null)
+    	agenda.setPaciente(paciente);
+    	
+    	AgendamentoRepositorio agenRep = new AgendamentoRepositorio();
+    	
+    	agenRep.adicionar(agenda);
+    	agenRep.encerrar();
+    	JOptionPane.showMessageDialog(null, "Agendamento efetuado com Sucesso");
+    	
+    }
+    
+    
+    public Date setData() {
+    	
+        LocalDate data = LocalDate.now();
+        Date date = new Date();
+        
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy"); 
+        try {
+			date = formatoData.parse(tfdDataAgenda.getText());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        return date;
+    }
+    
+    public Date setHora(String Hora) {
+    	
+        LocalDate data = LocalDate.now();
+        Date date = new Date();
+        
+        SimpleDateFormat formatoHora = new SimpleDateFormat("hh:mm"); 
+        try {
+			date = formatoHora.parse(Hora);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        return date;
+    }
+    
+    
+    public void agendarConsulta() {
+    	carregarCampos();
+    }
+    
     
     public void setColorClicked(JLabel lbButton){
         lbButton.setBackground(new Color(0,204,204));
@@ -541,6 +736,7 @@ public class AgendarConsulta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.ButtonGroup bgFinanceiro;
+    private javax.swing.JButton bt_BuscarCPF;
     private javax.swing.JLabel btn_Close;
     private javax.swing.JLabel btn_Maximizar;
     private javax.swing.JLabel btn_Minimizar;
@@ -552,7 +748,6 @@ public class AgendarConsulta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPaneObservacoes;
-    private javax.swing.JScrollPane jScrollPaneObservacoes1;
     private javax.swing.JComboBox<String> jcbConvenio;
     private javax.swing.JComboBox<String> jcbFormaPagamento;
     private javax.swing.JComboBox<String> jcbProcedimento;
@@ -576,13 +771,12 @@ public class AgendarConsulta extends javax.swing.JFrame {
     private javax.swing.JPanel pCentral;
     private javax.swing.JPanel pFinanceiro;
     private javax.swing.JTextArea textObservacoes;
-    private javax.swing.JTextArea textObservacoes1;
-    private javax.swing.JFormattedTextField tfdAs;
     private javax.swing.JTextField tfdAtendimento;
     private javax.swing.JFormattedTextField tfdCPF;
-    private javax.swing.JFormattedTextField tfdDas;
     private javax.swing.JFormattedTextField tfdDataAgenda;
     private javax.swing.JFormattedTextField tfdDataLancamento;
+    private javax.swing.JFormattedTextField tfdHrFim;
+    private javax.swing.JFormattedTextField tfdHrInicio;
     private javax.swing.JTextField tfdNome;
     private javax.swing.JFormattedTextField tfdPagoEm;
     // End of variables declaration//GEN-END:variables

@@ -7,6 +7,12 @@ package GesMED.bsi.Interface;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
+import GesMED.bsi.Entidades.*;
+import GesMED.bsi.Repositorios.PacienteRepositorio;
 
 /**
  *
@@ -16,20 +22,149 @@ public class ConsultaPacientes extends javax.swing.JFrame {
 
     private String StatusMenu = "";
     private PainelPrincipal pai = new PainelPrincipal();
+    private PacienteRepositorio pr;
     /**
      * Creates new form ConsultaUsuarios
      */
     public ConsultaPacientes() {
         initComponents();
         StatusMenu = "PESQUISAR";
+        pr = new PacienteRepositorio();
     }
     
     public ConsultaPacientes(PainelPrincipal painelP) {
         initComponents();
         StatusMenu = "PESQUISAR";
         pai = painelP;
+        pr = new PacienteRepositorio();
     }
+    
+    
+    public void preencherCamposPaciente(Paciente paciente){
+    	
+    	String CPF="", DataNascimento="", CEP="", Telefone="";
+    	
+    	//PREPARANDO OS DADOS DE CPF PARA O CPF FORMATADO.
+    	CPF = paciente.getCPF();
 
+    	String[] vetCPF = new String[4];
+    	vetCPF[0] = CPF.substring(0, 3);
+    	vetCPF[1] = CPF.substring(4, 7);
+    	vetCPF[2] = CPF.substring(8,11);
+    	vetCPF[3] = CPF.substring(12, CPF.length());
+
+    	CPF = vetCPF[0]+vetCPF[1]+vetCPF[2]+vetCPF[3];
+    	
+    	//PREPARANDO OS DADOS DA DATA DE NASCIMENTO.
+    	DataNascimento = paciente.getDataNasc();
+    	String[] vetDataNasc = DataNascimento.split("/");
+    	DataNascimento = vetDataNasc[0]+vetDataNasc[1]+vetDataNasc[2];
+    	
+    	//PREPARANDO OS DADOS DE TELEFONE PARA A FORMATAÇÃO 
+    	Telefone = paciente.getTelefone().getTelefone();
+    	//(68) XXXX-XXXX
+    	Telefone = Telefone.substring(1, Telefone.length());
+    	String[] vetTele = new String[2];
+    	vetTele[0] = Telefone.substring(0, 1);
+    	vetTele[1] = Telefone.substring(3, Telefone.length());
+    	Telefone = vetTele[0]+vetTele[1];
+    	vetTele = Telefone.split(" ");
+    	Telefone = vetTele[0]+vetTele[1];
+    	vetTele = Telefone.split("-");
+    	Telefone = vetTele[0]+vetTele[1];
+    	
+    	//PREPARANDO O DADO DE CPF PARA O FORMATO 
+    	CEP = paciente.getEndereco().getCEP();
+    	String[] vetCEP = CEP.split("-");
+    	CEP = vetCEP[0]+vetCEP[1];
+    	
+    	tfdNomePaciente.setText(paciente.getNome());
+    	tfdCPFPaciente.setText(CPF);
+    	tfdRGPaciente.setText(paciente.getRG());
+    	tfdNascimento.setText(DataNascimento);
+    	jcbTipoSanguineos.setSelectedItem(paciente.getTipoSangue());
+    	tfdObservacao.setText(paciente.getObservacao());
+    	tfdTelefonePaciente.setText(Telefone);
+    	tfdNumeroPaciente.setText(paciente.getEndereco().getNumero());
+    	tfdEndereco.setText(paciente.getEndereco().getRua());
+    	tfdCEPPaciente.setText(CEP);
+    	tdfBairro.setText(paciente.getEndereco().getBairro());
+    	tfdPlanoSaude.setText(paciente.getPlanoSaude().getTitulo());
+    	tfdDescricaoPS.setText(paciente.getPlanoSaude().getDescricao());
+    
+    }
+    
+    public void recebendoDadosPacientes() {
+    	String Nome = tfdNomePaciente.getText();
+    	String CPF = tfdCPFPaciente.getText();
+    	String RG = tfdRGPaciente.getText();
+    	String Nascimento = tfdNascimento.getText();
+    	String TipoSanguineo = jcbTipoSanguineos.getSelectedItem().toString();
+    	String Observacao = tfdObservacao.getText();
+    	String Telefone = tfdTelefonePaciente.getText();
+    	String Numero = tfdNumeroPaciente.getText();
+    	String Rua = tfdEndereco.getText();
+    	String CEP = tfdCEPPaciente.getText();
+    	String Bairro = tdfBairro.getText();
+    	String PlanoSaude = tfdPlanoSaude.getText();
+    	String Descricao = tfdDescricaoPS.getText();
+    	
+    	
+    	
+    	PacienteRepositorio pr = new PacienteRepositorio();
+    	pr.adicionar(getPaciente(Nome, CPF, RG, Nascimento, TipoSanguineo, Observacao, Telefone, Numero, Rua, CEP, Bairro, PlanoSaude, Descricao));
+    	pr.encerrar();
+    }
+    
+    public Paciente getPaciente(String Nome, String CPF, String RG, String Nascimento, String TipoSanguineo, 
+    							String Observacao, String Telefone, String Numero, String Rua, String CEP, String Bairro, String PlanoSaude, String DescricaoPS) {
+    	Paciente paciente = new Paciente();
+    	paciente.setNome(Nome);
+    	paciente.setCPF(CPF);
+    	paciente.setRG(RG);
+    	paciente.setDataNasc(Nascimento);
+    	paciente.setTipoSangue(TipoSanguineo);
+    	paciente.setObservacao(Observacao);
+    	
+    	Telefone phone = new Telefone();
+    	phone.setTelefone(Telefone);
+    	phone.setTipo("Residencial");
+    	
+    	paciente.setTelefone(phone);
+    	
+    	Endereco endereco = new Endereco();
+    	endereco.setRua(Rua);
+    	endereco.setBairro(Bairro);
+    	endereco.setNumero(Numero);
+    	endereco.setCEP(CEP);
+    	
+    	paciente.setEndereco(endereco);
+    	
+    	
+    	return paciente;
+    }
+    
+   public void BuscarPorNome(){
+       PacienteRepositorio pr = new PacienteRepositorio();
+       List<Paciente> listPacientes = pr.recuperarPacientesNome(tfd_Pesquisa.getText());
+       CarregarListaTabela(listPacientes);
+        
+    }
+   
+   public void CarregarListaTabela(List<Paciente> listPaciente) {
+	   
+	   DefaultTableModel modelListPacientes = (DefaultTableModel)   tblListPacientes.getModel();
+	   modelListPacientes.setNumRows(0);
+	   
+	   for(Paciente p : listPaciente) {
+		   modelListPacientes.addRow(new Object[] {
+				   p.getID(), p.getNome(), p
+		   });
+	   }
+	   
+   }
+   	
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,7 +181,7 @@ public class ConsultaPacientes extends javax.swing.JFrame {
         pCardPesquisa = new javax.swing.JPanel();
         pPesquisar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblListPacientes = new javax.swing.JTable();
         pOpcoes = new javax.swing.JPanel();
         lbPorTipo = new javax.swing.JLabel();
         lbBuscaTipoSanguineo = new javax.swing.JLabel();
@@ -65,13 +200,13 @@ public class ConsultaPacientes extends javax.swing.JFrame {
         btn_Editar = new javax.swing.JButton();
         pDetalhesUsuarios = new javax.swing.JPanel();
         lbNomeAtendente = new javax.swing.JLabel();
-        tfdNomeAtendente = new javax.swing.JTextField();
+        tfdNomePaciente = new javax.swing.JTextField();
         lbRGAtendente = new javax.swing.JLabel();
-        tfdRGAtendente = new javax.swing.JTextField();
+        tfdRGPaciente = new javax.swing.JTextField();
         lbCPFAtendente = new javax.swing.JLabel();
-        tfdCPFAtendente = new javax.swing.JTextField();
+        tfdCPFPaciente = new javax.swing.JTextField();
         lbNascimentoAtendente = new javax.swing.JLabel();
-        tfdNascimento1 = new javax.swing.JTextField();
+        tfdNascimento = new javax.swing.JTextField();
         lbObservacao = new javax.swing.JLabel();
         tfdObservacao = new javax.swing.JTextField();
         lbNascimentoPaciente2 = new javax.swing.JLabel();
@@ -81,7 +216,7 @@ public class ConsultaPacientes extends javax.swing.JFrame {
         lbEnderecoPaciente = new javax.swing.JLabel();
         tfdEndereco = new javax.swing.JTextField();
         lbBairroPaciente = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        tdfBairro = new javax.swing.JTextField();
         lbPlanoSaude = new javax.swing.JLabel();
         tfdPlanoSaude = new javax.swing.JTextField();
         tfdCEPPaciente = new javax.swing.JTextField();
@@ -122,42 +257,30 @@ public class ConsultaPacientes extends javax.swing.JFrame {
 
         pPesquisar.setBackground(new java.awt.Color(0, 204, 204));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblListPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "COD", "NOME"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(30);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(200);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(180);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(250);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblListPacientes);
+        if (tblListPacientes.getColumnModel().getColumnCount() > 0) {
+            tblListPacientes.getColumnModel().getColumn(0).setMinWidth(30);
+            tblListPacientes.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tblListPacientes.getColumnModel().getColumn(0).setMaxWidth(40);
+            tblListPacientes.getColumnModel().getColumn(1).setMinWidth(200);
+            tblListPacientes.getColumnModel().getColumn(1).setPreferredWidth(180);
+            tblListPacientes.getColumnModel().getColumn(1).setMaxWidth(250);
         }
 
         javax.swing.GroupLayout pPesquisarLayout = new javax.swing.GroupLayout(pPesquisar);
@@ -223,7 +346,7 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                         .addComponent(jcbBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pOpcoesLayout.createSequentialGroup()
                         .addComponent(lbBuscaTipoSanguineo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jcbBuscaTipoSanguineos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pOpcoesLayout.createSequentialGroup()
                         .addComponent(lbPorTipo)
@@ -233,7 +356,7 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                         .addComponent(rbBuscaNome)
                         .addGap(18, 18, 18)
                         .addComponent(rbBuscaCPF)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pOpcoesLayout.setVerticalGroup(
             pOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +375,7 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                 .addGroup(pOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbBuscaTipoSanguineo)
                     .addComponent(jcbBuscaTipoSanguineos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         pCardPesquisa.add(pOpcoes, "cardOpcoes");
@@ -303,6 +426,11 @@ public class ConsultaPacientes extends javax.swing.JFrame {
         pLateral.add(tfd_Pesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 250, 40));
 
         btn_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufac/bsi/images/Search_40px.png"))); // NOI18N
+        btn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BuscarActionPerformed(evt);
+            }
+        });
         pLateral.add(btn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 50, 40));
 
         ImgPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ufac/bsi/images/Pacientes_60px.png"))); // NOI18N
@@ -350,7 +478,7 @@ public class ConsultaPacientes extends javax.swing.JFrame {
         lbNascimentoPaciente2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbNascimentoPaciente2.setText("Tipo Sanguíneo:");
 
-        jcbTipoSanguineos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jcbTipoSanguineos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcbTipoSanguineos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+,", "B-", "AB+", "AB-", "O+", "O-" }));
 
         lbTelefonePaciente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -424,65 +552,75 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                 .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lbPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfdPlanoSaude)
                         .addGap(22, 22, 22)
                         .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbDescricaoPS)
                             .addComponent(tfdDescricaoPS, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
-                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDetalhesUsuariosLayout.createSequentialGroup()
+                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jSeparator1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDetalhesUsuariosLayout.createSequentialGroup()
+                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
                                 .addGap(22, 22, 22)
+                                .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                        .addComponent(lbNascimentoAtendente)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tfdNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lbRGAtendente)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tfdRGPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lbNomeAtendente)
+                                            .addComponent(lbCPFAtendente))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfdCPFPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfdNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)))))
+                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbTelefonePaciente)
+                                    .addComponent(lbEnderecoPaciente)
+                                    .addComponent(lbBairroPaciente))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
                                         .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
-                                                .addComponent(lbCPFAtendente)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tfdCPFAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
-                                                .addComponent(lbNascimentoAtendente)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tfdNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lbRGAtendente)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfdRGAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDetalhesUsuariosLayout.createSequentialGroup()
-                                        .addComponent(lbNomeAtendente)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfdNomeAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDetalhesUsuariosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
-                                        .addComponent(lbBairroPaciente)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                            .addComponent(tfdEndereco, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDetalhesUsuariosLayout.createSequentialGroup()
+                                                .addComponent(tfdTelefonePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lbTelefonePaciente)
-                                            .addComponent(lbEnderecoPaciente))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfdTelefonePaciente)
-                                            .addComponent(tfdEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(31, 31, 31)
-                                .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbNumeroPaciente)
-                                    .addComponent(lbCEPPaciente))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfdCEPPaciente)
-                                    .addComponent(tfdNumeroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDetalhesUsuariosLayout.createSequentialGroup()
+                                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                                .addComponent(lbCEPPaciente)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(tfdCEPPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                                .addComponent(lbNumeroPaciente)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(tfdNumeroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                        .addComponent(tdfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                .addGap(239, 239, 239)
+                                .addComponent(lbTitloJanelaDescricao))
+                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbDadosPessoais)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2))
+                            .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(lbNascimentoPaciente2)
                                 .addGap(18, 18, 18)
@@ -490,16 +628,8 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lbObservacao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfdObservacao))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDetalhesUsuariosLayout.createSequentialGroup()
-                                .addGap(239, 239, 239)
-                                .addComponent(lbTitloJanelaDescricao))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDetalhesUsuariosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lbDadosPessoais)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator2)))
-                        .addGap(0, 33, Short.MAX_VALUE)))
+                                .addComponent(tfdObservacao)))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
                 .addGap(137, 137, 137)
@@ -522,24 +652,29 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNomeAtendente)
-                    .addComponent(tfdNomeAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCPFAtendente)
-                    .addComponent(tfdCPFAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdCPFPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbRGAtendente)
-                    .addComponent(tfdRGAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdRGPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNascimentoAtendente)
-                    .addComponent(tfdNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbTipoSanguineos)
-                    .addComponent(lbNascimentoPaciente2, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(tfdObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbObservacao))
-                .addGap(29, 29, 29)
+                .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbTipoSanguineos)
+                            .addComponent(lbNascimentoPaciente2, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                            .addComponent(lbObservacao))
+                        .addGap(29, 29, 29))
+                    .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(tfdObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)))
                 .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -550,7 +685,7 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                             .addComponent(lbTelefonePaciente)
                             .addComponent(tfdTelefonePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbEnderecoPaciente)
                             .addComponent(tfdEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDetalhesUsuariosLayout.createSequentialGroup()
@@ -561,21 +696,20 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                         .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbCEPPaciente)
                             .addComponent(tfdCEPPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
                 .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
-                        .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbBairroPaciente)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(59, 59, 59)
                         .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbPlanoSaude)
                             .addComponent(tfdPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lbDescricaoPS)
+                    .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbDescricaoPS)
+                        .addComponent(tdfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbBairroPaciente))
                     .addGroup(pDetalhesUsuariosLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(tfdDescricaoPS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pDetalhesUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -584,7 +718,7 @@ public class ConsultaPacientes extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        bg.add(pDetalhesUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 650, 580));
+        bg.add(pDetalhesUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 700, 580));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -654,7 +788,10 @@ public class ConsultaPacientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_LimparActionPerformed
 
     private void btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarActionPerformed
-        // TODO add your handling code here:
+        int ID = (Integer) (tblListPacientes.getValueAt(tblListPacientes.getSelectedRow(), 0));
+        Paciente paciente = pr.recuperar(ID);
+//        System.out.println("Paciente Nome: " + paciente.getNome() + " ID após converter : "+ID);
+        preencherCamposPaciente(paciente);
     }//GEN-LAST:event_btn_EditarActionPerformed
 
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
@@ -674,6 +811,12 @@ public class ConsultaPacientes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_FecharActionPerformed
 
+    private void btn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BuscarActionPerformed
+            BuscarPorNome();
+    }//GEN-LAST:event_btn_BuscarActionPerformed
+    
+ 
+    
     /**
      * @param args the command line arguments
      */
@@ -727,8 +870,6 @@ public class ConsultaPacientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JComboBox<String> jcbBairro;
     private javax.swing.JComboBox<String> jcbBuscaTipoSanguineos;
     private javax.swing.JComboBox<String> jcbTipoSanguineos;
@@ -758,16 +899,18 @@ public class ConsultaPacientes extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbBuscaCPF;
     private javax.swing.JRadioButton rbBuscaCodigo;
     private javax.swing.JRadioButton rbBuscaNome;
+    private javax.swing.JTable tblListPacientes;
+    private javax.swing.JTextField tdfBairro;
     private javax.swing.JTextField tfdCEPPaciente;
-    private javax.swing.JTextField tfdCPFAtendente;
+    private javax.swing.JTextField tfdCPFPaciente;
     private javax.swing.JTextField tfdDescricaoPS;
     private javax.swing.JTextField tfdEndereco;
-    private javax.swing.JTextField tfdNascimento1;
-    private javax.swing.JTextField tfdNomeAtendente;
+    private javax.swing.JTextField tfdNascimento;
+    private javax.swing.JTextField tfdNomePaciente;
     private javax.swing.JTextField tfdNumeroPaciente;
     private javax.swing.JTextField tfdObservacao;
     private javax.swing.JTextField tfdPlanoSaude;
-    private javax.swing.JTextField tfdRGAtendente;
+    private javax.swing.JTextField tfdRGPaciente;
     private javax.swing.JTextField tfdTelefonePaciente;
     private javax.swing.JTextField tfd_Pesquisa;
     // End of variables declaration//GEN-END:variables

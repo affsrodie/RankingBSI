@@ -5,10 +5,19 @@
  */
 package GesMED.bsi.Interface;
 
-import java.awt.CardLayout;
+import GesMED.bsi.Entidades.Agendamento;
+import GesMED.bsi.Entidades.ListaEsperaAgenda;
+import GesMED.bsi.Entidades.Paciente;
+import GesMED.bsi.Repositorios.AgendamentoRepositorio;
+import GesMED.bsi.Repositorios.PacienteRepositorio;
 import java.awt.Color;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,18 +27,23 @@ public class ListaDeEspera extends javax.swing.JFrame {
     
     private PainelPrincipal Pai;
     private String StatusMenu;
+    private Paciente paciente;
+    private List<ListaEsperaAgenda> verListEspera;
+    private List<ListaEsperaAgenda> listEsperaFinal;
     /**
      * Creates new form AgendarConsulta
      */
+    
     public ListaDeEspera() {
         initComponents();
         StatusMenu="AGENDAMENTO";
-        
+        setTextFildData();
     }
     public ListaDeEspera(PainelPrincipal Principal) {
         Pai = Principal;
         initComponents();
         StatusMenu="AGENDAMENTO";
+        setTextFildData();
     }
 
     /**
@@ -50,17 +64,23 @@ public class ListaDeEspera extends javax.swing.JFrame {
         btn_Maximizar = new javax.swing.JLabel();
         btn_Minimizar = new javax.swing.JLabel();
         pCentral = new javax.swing.JPanel();
-        tfdNome = new javax.swing.JTextField();
         lbConvenio = new javax.swing.JLabel();
         jcbConvenio = new javax.swing.JComboBox<>();
         jcbStatus = new javax.swing.JComboBox<>();
         lbStatus = new javax.swing.JLabel();
         lbProcedimento = new javax.swing.JLabel();
         jcbProcedimento = new javax.swing.JComboBox<>();
-        lbNome = new javax.swing.JLabel();
+        lbCPF = new javax.swing.JLabel();
         jspListaEspera = new javax.swing.JScrollPane();
         tblListaEspera = new javax.swing.JTable();
         btn_Adicionar = new javax.swing.JButton();
+        tfdCPF = new javax.swing.JFormattedTextField();
+        lbNomeCompleto = new javax.swing.JLabel();
+        lbNome = new javax.swing.JLabel();
+        BuscarCPF = new javax.swing.JButton();
+        lbStatus1 = new javax.swing.JLabel();
+        tfdData = new javax.swing.JFormattedTextField();
+        btnVerLista = new javax.swing.JButton();
         btn_Salvar = new javax.swing.JButton();
         btn_Sair = new javax.swing.JButton();
 
@@ -120,7 +140,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
                 .addComponent(imgTituloJanela, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbIMGListaEspera)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 463, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 653, Short.MAX_VALUE)
                 .addGroup(pCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Minimizar)
                     .addGroup(pCabecalhoLayout.createSequentialGroup()
@@ -144,7 +164,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        bg.add(pCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 110));
+        bg.add(pCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 110));
 
         pCentral.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -166,25 +186,26 @@ public class ListaDeEspera extends javax.swing.JFrame {
         jcbProcedimento.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jcbProcedimento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Consulta", "Retorno", " " }));
 
-        lbNome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        lbNome.setText("Nome:");
+        lbCPF.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbCPF.setText("CPF:");
 
+        tblListaEspera.setFont(new java.awt.Font("Noto Sans", 0, 15)); // NOI18N
         tblListaEspera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Ord", "Nome", "Procedimento", "Status"
+                "Ord", "Nome", "Status", "Procedimento", "Convênio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -195,85 +216,150 @@ public class ListaDeEspera extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblListaEspera.setRowHeight(22);
         jspListaEspera.setViewportView(tblListaEspera);
         if (tblListaEspera.getColumnModel().getColumnCount() > 0) {
             tblListaEspera.getColumnModel().getColumn(0).setMinWidth(30);
             tblListaEspera.getColumnModel().getColumn(0).setMaxWidth(35);
-            tblListaEspera.getColumnModel().getColumn(1).setMinWidth(300);
-            tblListaEspera.getColumnModel().getColumn(1).setMaxWidth(400);
+            tblListaEspera.getColumnModel().getColumn(1).setMinWidth(400);
+            tblListaEspera.getColumnModel().getColumn(1).setPreferredWidth(400);
+            tblListaEspera.getColumnModel().getColumn(1).setMaxWidth(450);
+            tblListaEspera.getColumnModel().getColumn(4).setMinWidth(150);
+            tblListaEspera.getColumnModel().getColumn(4).setPreferredWidth(150);
+            tblListaEspera.getColumnModel().getColumn(4).setMaxWidth(150);
         }
 
         btn_Adicionar.setBackground(new java.awt.Color(255, 255, 255));
         btn_Adicionar.setText("ADICIONAR");
+        btn_Adicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AdicionarActionPerformed(evt);
+            }
+        });
+
+        try {
+            tfdCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfdCPF.setFont(new java.awt.Font("Noto Sans", 0, 15)); // NOI18N
+
+        lbNomeCompleto.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbNomeCompleto.setText("|");
+
+        lbNome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbNome.setText("Nome:");
+
+        BuscarCPF.setText("Buscar");
+        BuscarCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarCPFActionPerformed(evt);
+            }
+        });
+
+        lbStatus1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbStatus1.setText("Data:");
+
+        try {
+            tfdData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfdData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfdData.setFont(new java.awt.Font("Noto Sans", 0, 15)); // NOI18N
+
+        btnVerLista.setText("VER");
+        btnVerLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerListaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pCentralLayout = new javax.swing.GroupLayout(pCentral);
         pCentral.setLayout(pCentralLayout);
         pCentralLayout.setHorizontalGroup(
             pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCentralLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pCentralLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jspListaEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jspListaEspera)
+                        .addContainerGap())
                     .addGroup(pCentralLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(pCentralLayout.createSequentialGroup()
-                .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pCentralLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(lbConvenio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbConvenio, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pCentralLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbProcedimento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbProcedimento, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pCentralLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(13, 13, 13)
                         .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pCentralLayout.createSequentialGroup()
-                                .addComponent(lbStatus)
-                                .addGap(210, 210, 210))
-                            .addComponent(jcbStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pCentralLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))))
+                            .addGroup(pCentralLayout.createSequentialGroup()
+                                .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbNome)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbNomeCompleto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36))
+                            .addGroup(pCentralLayout.createSequentialGroup()
+                                .addComponent(lbStatus1)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfdData, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pCentralLayout.createSequentialGroup()
+                                        .addComponent(lbConvenio)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jcbConvenio, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jcbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(pCentralLayout.createSequentialGroup()
+                                        .addComponent(btnVerLista, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lbStatus)
+                                        .addGap(210, 210, 210)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbProcedimento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcbProcedimento, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(76, 76, 76))))))
         );
         pCentralLayout.setVerticalGroup(
             pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCentralLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(28, 28, 28)
                 .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbStatus)
+                    .addComponent(jcbStatus)
                     .addComponent(lbProcedimento)
                     .addComponent(jcbProcedimento)
-                    .addComponent(lbStatus)
-                    .addComponent(jcbStatus))
-                .addGap(18, 18, 18)
+                    .addComponent(lbStatus1)
+                    .addComponent(tfdData, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerLista, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbConvenio)
-                    .addComponent(jcbConvenio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jspListaEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
+                    .addComponent(jcbConvenio))
+                .addGap(38, 38, 38)
+                .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jspListaEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
 
-        bg.add(pCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, 400));
+        bg.add(pCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1000, 440));
 
         btn_Salvar.setBackground(new java.awt.Color(255, 255, 255));
         btn_Salvar.setText("SALVAR");
-        bg.add(btn_Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 520, 80, 30));
+        bg.add(btn_Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 560, 80, 30));
 
         btn_Sair.setBackground(new java.awt.Color(255, 255, 255));
         btn_Sair.setText("SAIR");
@@ -282,17 +368,17 @@ public class ListaDeEspera extends javax.swing.JFrame {
                 btn_SairActionPerformed(evt);
             }
         });
-        bg.add(btn_Sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 520, 70, 30));
+        bg.add(btn_Sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 70, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
@@ -329,22 +415,226 @@ public class ListaDeEspera extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_SairActionPerformed
 
+    private void BuscarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCPFActionPerformed
+     buscaPorCPF();
+//     for( boolean status : OperacoesList){
+//         JOptionPane.showMessageDialog(null, "Status: "+ status);
+//     }
+    }//GEN-LAST:event_BuscarCPFActionPerformed
+
+    private void btnVerListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerListaActionPerformed
+        listAgendaForData();
+        if(verListEspera!=null){
+            PreviewListaEspera previewList = new PreviewListaEspera(verListEspera, this, 0); // O ZERO É PARA IDENTIFICAR A JANELA QUE É SÓ PARA VER A LISTA DO DIA
+            previewList.setVisible(true);
+            this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Data não Preenchida");
+        }
+        
+    }//GEN-LAST:event_btnVerListaActionPerformed
+
+    private void btn_AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdicionarActionPerformed
+        
+    	AgendamentoRepositorio agenRep = new AgendamentoRepositorio();
+
+    	
+        List<Agendamento> listTempAdicionar = new ArrayList<Agendamento>();
+        
+        if(!jcbStatus.getSelectedItem().equals("Selecione")&&!jcbProcedimento.getSelectedItem().equals("Selecione")&&!jcbConvenio.getSelectedItem().equals("Selecione")) {
+        	 //TODAS MARCADAS = STATUS + PROCEDIMENTO + CONVENIO
+        	
+        	listTempAdicionar = agenRep.listarPorSPC(jcbStatus.getSelectedItem().toString(),jcbProcedimento.getSelectedItem().toString(),jcbStatus.getSelectedItem().toString());
+        	
+        }else if(!jcbStatus.getSelectedItem().equals("Selecione")&&!jcbProcedimento.getSelectedItem().equals("Selecione")&&jcbConvenio.getSelectedItem().equals("Selecione")) {
+        	//APENAS STATUS E PROCEDIMENTO
+        	listTempAdicionar = agenRep.listarPorStatusProcedimento(jcbStatus.getSelectedItem().toString(), jcbProcedimento.getSelectedItem().toString());
+        	
+        }else if(!jcbStatus.getSelectedItem().equals("Selecione")
+        		&&jcbProcedimento.getSelectedItem().equals("Selecione")
+        		&&jcbConvenio.getSelectedItem().equals("Selecione")) {
+        	//APENAS STATUS
+        		listTempAdicionar = agenRep.listarPorStatus(jcbStatus.getSelectedItem().toString());
+        }else if(jcbStatus.getSelectedItem().equals("Selecione")
+        		&&!jcbProcedimento.getSelectedItem().equals("Selecione")
+        		&&!jcbConvenio.getSelectedItem().equals("Selecione")) {
+        	//APENAS PROCEDIMENTO + CONVENIO
+        	listTempAdicionar = agenRep.listarPorProcedimentoConvenio(jcbProcedimento.getSelectedItem().toString(), jcbConvenio.getSelectedItem().toString());
+        	
+        }else if(jcbStatus.getSelectedItem().equals("Selecione")
+        		&&!jcbProcedimento.getSelectedItem().equals("Selecione")
+        		&&jcbConvenio.getSelectedItem().equals("Selecione")) {
+        	//APENAS PROCEDIMENTO
+        	listTempAdicionar = agenRep.listarPorProcedimento(jcbProcedimento.getSelectedItem().toString());
+        	
+        }else if(!jcbStatus.getSelectedItem().equals("Selecione")
+        		&&jcbProcedimento.getSelectedItem().equals("Selecione")
+        		&&!jcbConvenio.getSelectedItem().equals("Selecione")) {
+        	//APENAS STATUS E CONVENIO
+        	listTempAdicionar = agenRep.listarPorConventio(jcbConvenio.getSelectedItem().toString());
+        	
+        }else if(jcbStatus.getSelectedItem().equals("Selecione")
+        		&&!jcbProcedimento.getSelectedItem().equals("Selecione")
+        		&&jcbConvenio.getSelectedItem().equals("Selecione")) {
+        	//APENAS PROCEDIMENTO
+        	listTempAdicionar = agenRep.listarPorProcedimento(jcbProcedimento.getSelectedItem().toString());
+        }
+        
+        if(jcbStatus.getSelectedItem().equals("Selecione")&&jcbProcedimento.getSelectedItem().equals("Selecione")&&jcbConvenio.getSelectedItem().equals("Selecione")) {
+        		if(tfdData.getText().contains(" ")) {
+        		JOptionPane.showMessageDialog(null, "O Campo Data está Vazio ou Formato Inválido, e nada foi Selecionado nos outros Campos");
+        		setTextFildData();
+        		}else {
+        			listAgendaForData();
+            	    if(verListEspera!=null){
+            	    PreviewListaEspera previewList = new PreviewListaEspera(verListEspera, this, 1); // O ZERO É PARA IDENTIFICAR A JANELA QUE É SÓ PARA VER A LISTA DO DIA
+            	    previewList.setVisible(true);
+            	    this.setVisible(false);
+            	   }else {
+            		   JOptionPane.showMessageDialog(null, "Esta mesma Operação já foi Confirmada antes e adicionada na Lista");
+            	   }
+        		}
+        }else if(listTempAdicionar!=null&&listTempAdicionar.size()!=0) {
+              		
+           	PreviewListaEspera viewListEsp = new PreviewListaEspera(prepararListaEspera(listTempAdicionar),this,1);
+            	viewListEsp.setVisible(true);
+            	this.setVisible(false);
+        	        	
+        }else{
+            if(listTempAdicionar.size()==0)
+            JOptionPane.showMessageDialog(null, "Não há Consultas para este Perfil Selecionado");
+        }
+        agenRep.encerrar();
+        
+    }//GEN-LAST:event_btn_AdicionarActionPerformed
+
+ 
     
-    public void setColorClicked(JLabel lbButton){
-        lbButton.setBackground(new Color(0,204,204));
+    public void buscaPorCPF() {
+    	
+    	PacienteRepositorio pr = new PacienteRepositorio();
+        List<Paciente> BuscaPaciente = pr.recuperarPacienteCPF(tfdCPF.getText());
+      	pr.encerrar();
+      	if(BuscaPaciente.size()==1) {
+      		paciente = BuscaPaciente.get(0);
+      		String Nome = paciente.getNome();
+          	lbNomeCompleto.setText(Nome);
+      	}else {
+      		JOptionPane.showMessageDialog(null, "CPF Não encontrado!");
+      	}
     }
     
-    public void setColorEntered(JLabel lbButton){
-        lbButton.setBackground(new Color(200,240,240));
+    
+    public void setTextFildData(){
+            LocalDate data = LocalDate.now();
+            String Datastr = data.toString();
+            String[] strTemp = Datastr.split("-");
+            Datastr = strTemp[0]+strTemp[1]+strTemp[2];
+                     
+            tfdData.setText(Datastr);
+        
     }
     
-    public void setColorExited(JLabel lbButton){
-        lbButton.setBackground(new Color(0,204,153));
+    public void setListEspera(List<ListaEsperaAgenda> listEsperaTemp){
+        if(listEsperaFinal==null){
+            listEsperaFinal =listEsperaTemp;
+            CarregarTabela();
+        }else{
+        for(ListaEsperaAgenda listEspAg : listEsperaTemp){
+            listEsperaFinal.add(listEspAg);
+            CarregarTabela();
+        }
+      }      
     }
     
-    public void setColorPressed(JLabel lbButton){
-        lbButton.setBackground(new Color(140,198,198));
+       public void CarregarTabela(){
+        
+        DefaultTableModel modelListEspera = (DefaultTableModel) tblListaEspera.getModel();
+        modelListEspera.setNumRows(0);
+        
+        for(ListaEsperaAgenda listEsp : listEsperaFinal){
+            
+            modelListEspera.addRow(new Object[]{
+            listEsperaFinal.indexOf(listEsp), listEsp.getNome(), listEsp.getStatus(), listEsp.getProcedimento(), listEsp.getConvenio()
+            });
+            
+        }
+        
     }
+    
+      public void listAgendaForData(){
+    	  String Datastr="";
+            if(tfdData.getText().contains(" ")){
+                JOptionPane.showMessageDialog(null, "Formato de Data Inválido");
+            }else {
+            	Datastr = tfdData.getText();
+            }
+            
+            String[] strTemp = Datastr.split("/");
+            Datastr = strTemp[0]+"-"+strTemp[1]+"-"+strTemp[2];
+                     
+            List<Agendamento> listAgenda = new ArrayList<Agendamento>();
+            
+            AgendamentoRepositorio agenRep = new AgendamentoRepositorio();
+            
+            listAgenda= agenRep.listarPorData(Datastr);
+            
+            ListaEsperaAgenda listEsp = new ListaEsperaAgenda();
+            verListEspera = new ArrayList<ListaEsperaAgenda>();
+            for(Agendamento agendamento : listAgenda) {
+            	listEsp.setID(agendamento.getPaciente().getID());
+            	listEsp.setNome(agendamento.getPaciente().getNome());
+            	listEsp.setCelular(agendamento.getPaciente().getTelefone().getTelefone());
+            	listEsp.setCPF(agendamento.getPaciente().getCPF());
+            	listEsp.setStatus(agendamento.getStatus());
+            	listEsp.setProcedimento(agendamento.getProcedimento());
+            	listEsp.setConvenio(agendamento.getConvenio());
+            	verListEspera.add(listEsp);
+	        }
+	    }
+      
+      
+      public List<ListaEsperaAgenda> prepararListaEspera(List<Agendamento> listAdicionar){
+      		
+      		     		
+      		List<Agendamento> listAgenda = new ArrayList<Agendamento>();
+            
+            AgendamentoRepositorio agenRep = new AgendamentoRepositorio();
+            
+            listAgenda = listAdicionar;
+            
+            ListaEsperaAgenda listEsp = new ListaEsperaAgenda();
+            verListEspera = new ArrayList<ListaEsperaAgenda>();
+            for(Agendamento agendamento : listAgenda) {
+            	listEsp.setID(agendamento.getPaciente().getID());
+            	listEsp.setNome(agendamento.getPaciente().getNome());
+            	listEsp.setCelular(agendamento.getPaciente().getTelefone().getTelefone());
+            	listEsp.setCPF(agendamento.getPaciente().getCPF());
+            	listEsp.setStatus(agendamento.getStatus());
+            	listEsp.setProcedimento(agendamento.getProcedimento());
+            	listEsp.setConvenio(agendamento.getConvenio());
+            	verListEspera.add(listEsp);
+	        }
+      		
+      		return verListEspera;
+      	}
+           
+ 
+	    public void setColorClicked(JLabel lbButton){
+	        lbButton.setBackground(new Color(0,204,204));
+	    }
+	    
+	    public void setColorEntered(JLabel lbButton){
+	        lbButton.setBackground(new Color(200,240,240));
+	    }
+	    
+	    public void setColorExited(JLabel lbButton){
+	        lbButton.setBackground(new Color(0,204,153));
+	    }
+	    
+	    public void setColorPressed(JLabel lbButton){
+	        lbButton.setBackground(new Color(140,198,198));
+	    }
     
     /**
      * @param args the command line arguments
@@ -383,8 +673,10 @@ public class ListaDeEspera extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BuscarCPF;
     private javax.swing.JPanel bg;
     private javax.swing.ButtonGroup bgFinanceiro;
+    private javax.swing.JButton btnVerLista;
     private javax.swing.JButton btn_Adicionar;
     private javax.swing.JLabel btn_Close;
     private javax.swing.JLabel btn_Maximizar;
@@ -396,14 +688,18 @@ public class ListaDeEspera extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbProcedimento;
     private javax.swing.JComboBox<String> jcbStatus;
     private javax.swing.JScrollPane jspListaEspera;
+    private javax.swing.JLabel lbCPF;
     private javax.swing.JLabel lbConvenio;
     private javax.swing.JLabel lbIMGListaEspera;
     private javax.swing.JLabel lbNome;
+    private javax.swing.JLabel lbNomeCompleto;
     private javax.swing.JLabel lbProcedimento;
     private javax.swing.JLabel lbStatus;
+    private javax.swing.JLabel lbStatus1;
     private javax.swing.JPanel pCabecalho;
     private javax.swing.JPanel pCentral;
     private javax.swing.JTable tblListaEspera;
-    private javax.swing.JTextField tfdNome;
+    private javax.swing.JFormattedTextField tfdCPF;
+    private javax.swing.JFormattedTextField tfdData;
     // End of variables declaration//GEN-END:variables
 }

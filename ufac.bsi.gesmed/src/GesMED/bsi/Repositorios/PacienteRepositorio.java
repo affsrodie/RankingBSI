@@ -45,6 +45,19 @@ public class PacienteRepositorio {
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Paciente> recuperarPacienteCPF(String CPF){
+		Query query = em.createQuery("SELECT p FROM Paciente p WHERE CPF='"+CPF+"'");
+		return query.getResultList();
+	}
+	
+	public List<Paciente> recuperarPacientesNome(String Nome){
+		Query query = em.createQuery("SELECT p FROM Paciente p WHERE Nome like '%"+Nome+"%'");
+		return query.getResultList();
+	}
+	
+	
+	
 	public void encerrar(){
 		em.close();
 		emf.close();
