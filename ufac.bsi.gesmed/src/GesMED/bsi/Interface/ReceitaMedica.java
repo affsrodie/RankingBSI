@@ -1,0 +1,397 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package GesMED.bsi.Interface;
+import java.util.ArrayList;
+import java.util.List;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author leoncio
+ */
+public class ReceitaMedica extends javax.swing.JDialog {
+    
+
+    private List<Receita> listReceitas = new ArrayList<Receita>();
+     private static Paragraph paragrafo;
+        
+
+    /**
+     * Creates new form NovoFavorecido
+     */
+    public ReceitaMedica() {
+        initComponents();
+        
+        lbObsNome.setText("");
+        lbObsDescricao.setText("");
+    }
+    
+    public void adicionarReceita(){
+        
+        String Medicamento = tfdMedicamento.getText();
+        String QuantHoras = tfdQuantHoras.getText();
+        String Observacoes = tfdObservacoes.getText();
+        
+        
+        Receita receita = new Receita();
+        receita.setMedicamento(Medicamento);
+        receita.setQuant(QuantHoras);
+        receita.setObservacoes(Observacoes);
+        
+        listReceitas.add(receita);
+        LimparCampos();
+    }
+    
+    public void LimparCampos(){
+        tfdMedicamento.setText("");
+        tfdQuantHoras.setText("");
+        tfdObservacoes.setText("");
+    }
+    
+       public void GerarReceitaPDF(){
+          
+            Document document = new Document();
+           
+          
+          LocalDate dataHoje = LocalDate.now();
+            
+          try {
+              
+              PdfWriter.getInstance(document, new FileOutputStream("/home/leoncio/Documents/GesMed/Recibos/Receita Medica - "+dataHoje.toString()+".pdf"));
+              document.open();
+              Font bold = new Font(FontFamily.TIMES_ROMAN, 15, Font.BOLD);
+              Font bold2 = new Font(FontFamily.TIMES_ROMAN, 22, Font.BOLD);
+              Font fontConteudo = new Font(FontFamily.TIMES_ROMAN, 15);
+              // adicionando um parágrafo no documento
+              paragrafo = new Paragraph("GESMED - Clinica Academicos da UFAC", bold2);
+              paragrafo.setAlignment(Element.ALIGN_CENTER);
+              document.add(paragrafo);
+              
+              paragrafo = new Paragraph("RECEITA MÉDICA", bold);
+              paragrafo.setAlignment(Element.ALIGN_CENTER);
+              document.add(paragrafo);
+              
+              paragrafo = new Paragraph("______________________________________________________________", fontConteudo);
+              document.add(paragrafo);
+              for(Receita receita : listReceitas){
+                    paragrafo = new Paragraph("\n\nMédicamento: "+receita.getMedicamento()+"\n\n"+"Qtd. Horas: "+receita.getQuant()+"\n\n"+"Observações: "+receita.getObservacoes(), fontConteudo);
+                    document.add(paragrafo);
+              paragrafo = new Paragraph("______________________________________________________________", fontConteudo);
+              document.add(paragrafo);
+              }
+              
+              
+              String RodapeFinal = "\n" + "__________________________________________________________"+
+                                         "\n" +  " Carimbo ou Assinatura do Médico"+"\n\n\n\n\n"+
+                                        "Clínica Universitaria - Avenida Ceara nº 345 \n" +
+                                            "Rio Branco - Acre";
+                      
+              paragrafo = new Paragraph("\n\n\n\n\n\n"+RodapeFinal);
+              paragrafo.setAlignment(Element.ALIGN_CENTER);
+              document.add(paragrafo);
+  
+          }
+          catch(DocumentException de) {
+              System.err.println(de.getMessage());
+          }
+          catch(IOException ioe) {
+              System.err.println(ioe.getMessage());
+          }finally{
+               document.close();
+               
+          }
+          
+            try {
+                Desktop.getDesktop().open(new File("/home/leoncio/Documents/GesMed/Recibos/Receita Medica - "+dataHoje.toString()+".pdf"));
+            } catch (IOException ex) {
+                Logger.getLogger(GerarRecibo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
+    }
+ 
+    
+    public void encerrarJanela(){
+        
+        this.dispose();
+    }
+
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        bg = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        tfdMedicamento = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tfdObservacoes = new javax.swing.JTextArea();
+        lbObsNome = new javax.swing.JLabel();
+        lbObsDescricao = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        tfdQuantHoras = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnAdicionar = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+
+        setTitle("Cadastro de Favorecido");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setModal(true);
+        setType(java.awt.Window.Type.POPUP);
+
+        bg.setBackground(new java.awt.Color(0, 204, 204));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 28)); // NOI18N
+        jLabel1.setForeground(java.awt.Color.white);
+        jLabel1.setText("Receita Medica");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(212, 212, 212)
+                .addComponent(jLabel1)
+                .addContainerGap(262, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(20, 20, 20))
+        );
+
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 90));
+
+        jPanel2.setBackground(java.awt.Color.white);
+
+        jLabel2.setFont(new java.awt.Font("Noto Sans", 0, 16)); // NOI18N
+        jLabel2.setText("Medicamento:");
+
+        jLabel3.setFont(new java.awt.Font("Noto Sans", 0, 16)); // NOI18N
+        jLabel3.setText("Observações:");
+
+        tfdObservacoes.setColumns(20);
+        tfdObservacoes.setRows(5);
+        jScrollPane1.setViewportView(tfdObservacoes);
+
+        lbObsNome.setForeground(new java.awt.Color(245, 14, 14));
+        lbObsNome.setText("Campos Vazios");
+
+        lbObsDescricao.setForeground(new java.awt.Color(245, 14, 14));
+        lbObsDescricao.setText("Campos Vazios");
+
+        jLabel4.setFont(new java.awt.Font("Noto Sans", 0, 16)); // NOI18N
+        jLabel4.setText("Qtd. Horas:");
+
+        try {
+            tfdQuantHoras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfdQuantHoras.setFont(new java.awt.Font("Noto Sans", 0, 15)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Noto Sans", 0, 16)); // NOI18N
+        jLabel5.setText("horas");
+
+        btnAdicionar.setText("ADICIONAR A RECEITA");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(lbObsDescricao))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(tfdQuantHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbObsNome)
+                            .addComponent(tfdMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbObsNome)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdQuantHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbObsDescricao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 670, 330));
+
+        btnFechar.setText("FECHAR");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+        bg.add(btnFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 100, 33));
+
+        btnSalvar.setText("GERAR RECEITA");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+        bg.add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 130, 33));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        encerrarJanela();
+    }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+            GerarReceitaPDF();
+        
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        adicionarReceita();
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ReceitaMedica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ReceitaMedica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ReceitaMedica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ReceitaMedica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ReceitaMedica().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bg;
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbObsDescricao;
+    private javax.swing.JLabel lbObsNome;
+    private javax.swing.JTextField tfdMedicamento;
+    private javax.swing.JTextArea tfdObservacoes;
+    private javax.swing.JFormattedTextField tfdQuantHoras;
+    // End of variables declaration//GEN-END:variables
+}

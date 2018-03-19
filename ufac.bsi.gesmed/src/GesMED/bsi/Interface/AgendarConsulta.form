@@ -359,7 +359,7 @@
                         <StringItem index="2" value="Confirmado"/>
                         <StringItem index="3" value="Chegou"/>
                         <StringItem index="4" value="Em Andamento"/>
-                        <StringItem index="5" value="Finalizando"/>
+                        <StringItem index="5" value="Finalizado"/>
                         <StringItem index="6" value="Cancelado"/>
                         <StringItem index="7" value="Faltou"/>
                         <StringItem index="8" value=" "/>
@@ -368,6 +368,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbStatusActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>

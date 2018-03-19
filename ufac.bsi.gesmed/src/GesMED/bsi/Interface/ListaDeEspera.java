@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
 /**
  *
  * @author Leoncio Carioca
@@ -81,6 +83,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
         lbStatus1 = new javax.swing.JLabel();
         tfdData = new javax.swing.JFormattedTextField();
         btnVerLista = new javax.swing.JButton();
+        btn_AtenderPaciente = new javax.swing.JButton();
         btn_Salvar = new javax.swing.JButton();
         btn_Sair = new javax.swing.JButton();
 
@@ -161,10 +164,10 @@ public class ListaDeEspera extends javax.swing.JFrame {
                     .addComponent(btn_Minimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Maximizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Close, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        bg.add(pCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 110));
+        bg.add(pCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 90));
 
         pCentral.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -175,7 +178,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
         jcbConvenio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Particular" }));
 
         jcbStatus.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Agendado", "Confirmado", "Chegou", "Em Andamento", "Finalizando", "Cancelado", "Faltou", " ", " ", " " }));
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Agendado", "Confirmado", "Chegou", "Em Andamento", " ", " ", " " }));
 
         lbStatus.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbStatus.setText("Status:");
@@ -192,10 +195,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
         tblListaEspera.setFont(new java.awt.Font("Noto Sans", 0, 15)); // NOI18N
         tblListaEspera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Ord", "Nome", "Status", "Procedimento", "Convênio"
@@ -275,6 +275,14 @@ public class ListaDeEspera extends javax.swing.JFrame {
             }
         });
 
+        btn_AtenderPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        btn_AtenderPaciente.setText("INICIAR ATENDIMENTO");
+        btn_AtenderPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AtenderPacienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pCentralLayout = new javax.swing.GroupLayout(pCentral);
         pCentral.setLayout(pCentralLayout);
         pCentralLayout.setHorizontalGroup(
@@ -288,19 +296,6 @@ public class ListaDeEspera extends javax.swing.JFrame {
                     .addGroup(pCentralLayout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pCentralLayout.createSequentialGroup()
-                                .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbNome)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbNomeCompleto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36))
                             .addGroup(pCentralLayout.createSequentialGroup()
                                 .addComponent(lbStatus1)
                                 .addGap(18, 18, 18)
@@ -322,12 +317,29 @@ public class ListaDeEspera extends javax.swing.JFrame {
                                 .addComponent(lbProcedimento)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcbProcedimento, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(76, 76, 76))))))
+                                .addGap(76, 76, 76))
+                            .addGroup(pCentralLayout.createSequentialGroup()
+                                .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbNome)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbNomeCompleto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36))))))
+            .addGroup(pCentralLayout.createSequentialGroup()
+                .addGap(379, 379, 379)
+                .addComponent(btn_AtenderPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pCentralLayout.setVerticalGroup(
             pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCentralLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
                 .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbStatus)
                     .addComponent(jcbStatus)
@@ -340,26 +352,28 @@ public class ListaDeEspera extends javax.swing.JFrame {
                 .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbConvenio)
                     .addComponent(jcbConvenio))
-                .addGap(38, 38, 38)
+                .addGap(28, 28, 28)
                 .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tfdCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lbNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jspListaEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                        .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jspListaEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_AtenderPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
-        bg.add(pCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1000, 440));
+        bg.add(pCentral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1000, 470));
 
         btn_Salvar.setBackground(new java.awt.Color(255, 255, 255));
         btn_Salvar.setText("SALVAR");
-        bg.add(btn_Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 560, 80, 30));
+        bg.add(btn_Salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 570, 80, 30));
 
         btn_Sair.setBackground(new java.awt.Color(255, 255, 255));
         btn_Sair.setText("SAIR");
@@ -368,7 +382,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
                 btn_SairActionPerformed(evt);
             }
         });
-        bg.add(btn_Sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 70, 30));
+        bg.add(btn_Sair, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 570, 80, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -378,7 +392,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
         );
 
         pack();
@@ -488,7 +502,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
         			listAgendaForData();
             	    if(verListEspera!=null){
             	    PreviewListaEspera previewList = new PreviewListaEspera(verListEspera, this, 1); // O ZERO É PARA IDENTIFICAR A JANELA QUE É SÓ PARA VER A LISTA DO DIA
-            	    previewList.setVisible(true);
+            	    previewList.setVisible(true);                                                   // 1 - UM É PARA IDENTIFICAR A JANELA QUE VAMOS ADICIONAR A LISTA
             	    this.setVisible(false);
             	   }else {
             		   JOptionPane.showMessageDialog(null, "Esta mesma Operação já foi Confirmada antes e adicionada na Lista");
@@ -507,6 +521,10 @@ public class ListaDeEspera extends javax.swing.JFrame {
         agenRep.encerrar();
         
     }//GEN-LAST:event_btn_AdicionarActionPerformed
+
+    private void btn_AtenderPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AtenderPacienteActionPerformed
+         iniciarAtendimento();
+    }//GEN-LAST:event_btn_AtenderPacienteActionPerformed
 
  
     
@@ -583,6 +601,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
             verListEspera = new ArrayList<ListaEsperaAgenda>();
             for(Agendamento agendamento : listAgenda) {
             	listEsp.setID(agendamento.getPaciente().getID());
+                listEsp.setIDAgendamento(agendamento.getIDAgenda());
             	listEsp.setNome(agendamento.getPaciente().getNome());
             	listEsp.setCelular(agendamento.getPaciente().getTelefone().getTelefone());
             	listEsp.setCPF(agendamento.getPaciente().getCPF());
@@ -592,6 +611,24 @@ public class ListaDeEspera extends javax.swing.JFrame {
             	verListEspera.add(listEsp);
 	        }
 	    }
+      
+      public void iniciarAtendimento(){
+    	  
+    	  int IDListEsspera = (int) tblListaEspera.getSelectedRow();
+    	  ListaEsperaAgenda espera = listEsperaFinal.get(IDListEsspera);
+          AgendamentoRepositorio agenRep = new AgendamentoRepositorio();
+          
+          Agendamento agenda = agenRep.recuperar(espera.getIDAgendamento());
+          agenRep.encerrar();
+
+    	  
+          if(agenda!=null){
+          AtendimentoConsulta atender = new AtendimentoConsulta(this, agenda);
+          atender.setVisible(true);
+          this.setVisible(false);
+          }
+          
+      }
       
       
       public List<ListaEsperaAgenda> prepararListaEspera(List<Agendamento> listAdicionar){
@@ -607,6 +644,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
             verListEspera = new ArrayList<ListaEsperaAgenda>();
             for(Agendamento agendamento : listAgenda) {
             	listEsp.setID(agendamento.getPaciente().getID());
+                listEsp.setIDAgendamento(agendamento.getIDAgenda());
             	listEsp.setNome(agendamento.getPaciente().getNome());
             	listEsp.setCelular(agendamento.getPaciente().getTelefone().getTelefone());
             	listEsp.setCPF(agendamento.getPaciente().getCPF());
@@ -678,6 +716,7 @@ public class ListaDeEspera extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgFinanceiro;
     private javax.swing.JButton btnVerLista;
     private javax.swing.JButton btn_Adicionar;
+    private javax.swing.JButton btn_AtenderPaciente;
     private javax.swing.JLabel btn_Close;
     private javax.swing.JLabel btn_Maximizar;
     private javax.swing.JLabel btn_Minimizar;

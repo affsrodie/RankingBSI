@@ -21,7 +21,7 @@ public class PacienteRepositorio {
 	
 	public void adicionar(Paciente paciente){
 		em.getTransaction().begin();
-		em.persist(paciente);
+		em.merge(paciente);
 		em.getTransaction().commit();
 	}
 	public Paciente recuperar(int id){
@@ -43,6 +43,16 @@ public class PacienteRepositorio {
 	public List<Paciente> recuperarTodos(){
 		Query query = em.createQuery("SELECT p FROM Paciente p");
 		return query.getResultList();
+	}
+	
+	public int gerarID() {
+		List<Paciente> todos = recuperarTodos();
+		int NOVO_ID=1;
+                if(todos.size()>=1){
+                    Paciente paciente = todos.get(todos.size()-1);
+                    NOVO_ID = paciente.getID() + 1;
+                }
+		return NOVO_ID;
 	}
 	
 	@SuppressWarnings("unchecked")

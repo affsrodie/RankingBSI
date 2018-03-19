@@ -8,6 +8,7 @@ package GesMED.bsi.Entidades;
 
 public class ListaEsperaAgenda {
         private int ID;
+        private int IDAgendamento;
         private String Nome;
         private String CPF;
         private String Celular;
@@ -23,6 +24,16 @@ public class ListaEsperaAgenda {
         this.ID = ID;
     }
 
+    public int getIDAgendamento() {
+        return IDAgendamento;
+    }
+
+    public void setIDAgendamento(int IDAgendamento) {
+        this.IDAgendamento = IDAgendamento;
+    }
+
+    
+    
     public String getNome() {
         return Nome;
     }
@@ -72,5 +83,6 @@ public class ListaEsperaAgenda {
     }
 
 
+    
     
 }

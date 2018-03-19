@@ -200,7 +200,12 @@ public class AgendarConsulta extends javax.swing.JFrame {
         jcbConvenio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Particular" }));
 
         jcbStatus.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Agendado", "Confirmado", "Chegou", "Em Andamento", "Finalizando", "Cancelado", "Faltou", " ", " ", " " }));
+        jcbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Agendado", "Confirmado", "Chegou", "Em Andamento", "Finalizado", "Cancelado", "Faltou", " ", " ", " " }));
+        jcbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbStatusActionPerformed(evt);
+            }
+        });
 
         lbStatus.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbStatus.setText("Status:");
@@ -532,6 +537,10 @@ public class AgendarConsulta extends javax.swing.JFrame {
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
         agendarConsulta();
     }//GEN-LAST:event_btn_SalvarActionPerformed
+
+    private void jcbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbStatusActionPerformed
 
     
     public void buscaPorCPF() {

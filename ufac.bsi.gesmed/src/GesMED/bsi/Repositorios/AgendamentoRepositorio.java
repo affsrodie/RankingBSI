@@ -79,6 +79,11 @@ public class AgendamentoRepositorio {
             return query.getResultList();
         }
         
+        public List<Agendamento> listarparaAgendarContas(){
+            Query query = em.createQuery("SELECT a FROM Agendamento a WHERE Status='Finalizado' OR  Status='Chegou' OR Status='Em Andamento' order by Status");
+            return query.getResultList();
+        }
+        
         public List<Agendamento> listarPorProcedimento(String Procedimento){
             LocalDate data = LocalDate.now();
             String Data = data.toString();

@@ -5,5 +5,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/AbsoluteLayout"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/MySQL"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Calendar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PDFGerator"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

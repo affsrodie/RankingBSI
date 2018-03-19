@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import GesMED.bsi.Entidades.Medico;
+import GesMED.bsi.Entidades.Paciente;
 
 public class MedicoRepositorio {
 	
@@ -37,7 +38,17 @@ public class MedicoRepositorio {
 		em.getTransaction().begin();
 		em.remove(medico);
 		em.getTransaction().commit();
-	}	
+	}
+	
+	public int gerarID() {
+		List<Medico> todos = recuperarTodos();
+		int NOVO_ID=1;
+                if(todos.size()>=1){
+                   Medico medico = todos.get(todos.size());
+                    NOVO_ID = medico.getID() + 1;
+                }
+		return NOVO_ID;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Medico> recuperarTodos(){

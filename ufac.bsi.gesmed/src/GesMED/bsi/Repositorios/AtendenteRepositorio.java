@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import GesMED.bsi.Entidades.Atendente;
+import GesMED.bsi.Entidades.Paciente;
 
 public class AtendenteRepositorio {
 	
@@ -44,6 +45,16 @@ public class AtendenteRepositorio {
 	public List<Atendente> recuperarTodos(){
 		Query query = em.createQuery("SELECT p FROM Atendente p");
 		return query.getResultList();
+	}
+	
+	public int gerarID() {
+		List<Atendente> todos = recuperarTodos();
+		int NOVO_ID=1;
+           if(todos.size()>=1){
+              Atendente atendente = todos.get(todos.size());
+                    NOVO_ID = atendente.getID() + 1;
+            }
+		return NOVO_ID;
 	}
 	
 	public void encerrar(){

@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import GesMED.bsi.Entidades.Consulta;
+import GesMED.bsi.Entidades.Especializacao;
 
 public class EspecialRepositorio {
 	
@@ -19,31 +19,31 @@ public class EspecialRepositorio {
 		em = emf.createEntityManager();
 	}
 	
-	public void adicionar(Consulta consulta){
+	public void adicionar(Especializacao especial){
 		em.getTransaction().begin();
-		em.persist(consulta);
+		em.persist(especial);
 		em.getTransaction().commit();
 	}
 	
-	public Consulta recuperar(int id){
-		return em.find(Consulta.class, id);
+	public Especializacao recuperar(int id){
+		return em.find(Especializacao.class, id);
 	}
 	
-	public void atualizar(Consulta consulta){
+	public void atualizar(Especializacao especial){
 		em.getTransaction().begin();
-		em.merge(consulta);
+		em.merge(especial);
 		em.getTransaction().commit();
 	}
 	
-	public void remover(Consulta consulta){
+	public void remover(Especializacao especial){
 		em.getTransaction().begin();
-		em.remove(consulta);
+		em.remove(especial);
 		em.getTransaction().commit();
 	}	
 	
 	@SuppressWarnings("unchecked")
-	public List<Consulta> recuperarTodos(){
-		Query query = em.createQuery("SELECT c FROM Consulta c");
+	public List<Especializacao> recuperarTodas(){
+		Query query = em.createQuery("SELECT e FROM Especializacao e");
 		return query.getResultList();
 	}
 	

@@ -1,9 +1,0 @@
-tfdNome.getText()
-tfdCPF.getText()
-jcbConvenio.getSelectedItem().toString();
-jcbStatus.getSelectedItem().toString();
-jcbProcedimento.getSelectedItem().toString();
-tfdDataAgenda.getText()
-tfdHrInicio.getText()
-tfdHrFim.getText()
-textObservacoes.getText();

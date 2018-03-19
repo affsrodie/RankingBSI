@@ -22,6 +22,9 @@ public class Paciente extends Pessoa {
 
 	@OneToMany(mappedBy="paciente")
 	private List<Agendamento> agendamentos = new ArrayList<Agendamento>();
+        
+        @OneToMany(mappedBy="paciente")
+	private List<ContaPaciente> contas = new ArrayList<ContaPaciente>();
 	
 	
 	public String getTipoSangue() {
@@ -30,6 +33,7 @@ public class Paciente extends Pessoa {
 	public void setTipoSangue(String tipoSangue) {
 		TipoSangue = tipoSangue;
 	}
+
 	public String getObservacao() {
 		return Observacao;
 	}
@@ -55,6 +59,21 @@ public class Paciente extends Pessoa {
 	}
 	public void delAgendamento(Agendamento agenda) {
 		this.agendamentos.remove(agenda);
+	}
+	
+	public List<ContaPaciente> getContas() {
+		return contas;
+	}
+	public void setContas(List<ContaPaciente> contas) {
+		this.contas = contas;
+	}
+	
+	public void addConta(ContaPaciente conta) {
+		this.contas.add(conta);
+	}
+	
+	public void delConta(ContaPaciente conta) {
+		this.contas.remove(conta);
 	}
 	
 }
