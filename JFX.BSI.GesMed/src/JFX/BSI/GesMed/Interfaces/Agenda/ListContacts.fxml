@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneContacts" prefHeight="264.0" prefWidth="203.0" style="-fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <effect>
+      <DropShadow />
+   </effect>
+   <children>
+      <JFXButton fx:id="btn_AddPhone" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="162.0" layoutY="227.0" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #4687FF; -fx-background-radius: 1cm;" text="ADD" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="-1.0">
+         <graphic>
+            <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="28" stroke="WHITE" wrappingWidth="26.0" />
+         </graphic>
+      </JFXButton>
+      <Pane layoutX="63.0" layoutY="-38.0" prefHeight="74.0" prefWidth="71.0" style="-fx-background-radius: 4cm; -fx-background-color: #ffff;">
+         <children>
+            <MaterialDesignIconView fill="#3ecdb5" glyphName="PHONE_LOG" layoutX="12.0" layoutY="50.0" size="45" wrappingWidth="26.000005185604095" />
+         </children>
+      </Pane>
+      <Label fx:id="infoPhonePessoal" layoutX="7.0" layoutY="37.0" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm; -fx-border-radius: 0.3cm; -fx-border-color: #3ecdb5;" text="Pessoal" textFill="#24d39c">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView fill="#3ecdb5" glyphName="CELLPHONE_ANDROID" size="28" wrappingWidth="26.000005185604095" />
+         </graphic>
+      </Label>
+      <Label fx:id="infoPhoneRecado" layoutX="8.0" layoutY="80.0" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm; -fx-border-radius: 0.3cm; -fx-border-color: #3ecdb5;" text="Para recado" textFill="#24d39c">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView fill="#3ecdb5" glyphName="CELLPHONE_BASIC" size="28" wrappingWidth="26.000005185604095" />
+         </graphic>
+      </Label>
+      <Label fx:id="infoPhoneFixo" layoutX="8.0" layoutY="123.0" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm; -fx-border-radius: 0.3cm; -fx-border-color: #3ecdb5;" text="Fixo" textFill="#24d39c">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView fill="#3ecdb5" glyphName="PHONE_FORWARD" size="28" wrappingWidth="26.000005185604095" />
+         </graphic>
+      </Label>
+      <Label fx:id="infoPhoneTrabalho" layoutX="9.0" layoutY="167.0" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm; -fx-border-radius: 0.3cm; -fx-border-color: #3ecdb5;" text="Trabalho" textFill="#24d39c">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView fill="#3ecdb5" glyphName="DESKPHONE" size="28" wrappingWidth="26.000005185604095" />
+         </graphic>
+      </Label>
+   </children>
+</AnchorPane>

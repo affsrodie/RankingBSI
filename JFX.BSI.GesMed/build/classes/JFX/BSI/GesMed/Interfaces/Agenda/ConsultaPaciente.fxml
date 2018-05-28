@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <JFXToolbar prefHeight="95.0" prefWidth="1100.0" style="-fx-background-color: #00C8FF;">
+               <center>
+                  <Label text="Atendimento Clínico" textFill="#fcf6f6" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <FontAwesomeIconView fill="#eff1f5" glyphName="USER_MD" size="80" wrappingWidth="68.99999678134918" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </center>
+            </JFXToolbar>
+            <AnchorPane prefHeight="272.0" prefWidth="600.0" style="-fx-background-color: #ffff;" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane fx:id="sideAnchor" prefHeight="550.0" prefWidth="200.0" styleClass="side-bar" stylesheets="@../custom.css">
+                           <children>
+                              <GridPane prefHeight="217.0" prefWidth="200.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <JFXButton fx:id="btnConsultaMedica" alignment="BASELINE_LEFT" onMouseClicked="#openConsultaMedica" prefHeight="42.0" prefWidth="199.0" styleClass="side-buttons" text="Consulta Médica" textFill="#757575">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#757575" glyphName="DASHBOARD" size="22" wrappingWidth="28.0" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btnReceitaMedica" alignment="BASELINE_LEFT" onMouseClicked="#openReceitaMedica" prefHeight="42.0" prefWidth="199.0" styleClass="side-buttons" text="Receita Médica" textFill="#757575" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#757575" glyphName="MEDKIT" size="22" wrappingWidth="30.0" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btnGerarAtestado" alignment="BASELINE_LEFT" prefHeight="42.0" prefWidth="199.0" styleClass="side-buttons" text="Gerar Atestado" textFill="#757575" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../imagens/Autograph_30px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btnSolicitarExame" alignment="BASELINE_LEFT" onMouseClicked="#openSolicitarExame" prefHeight="42.0" prefWidth="199.0" styleClass="side-buttons" text=" Solicitar Exame" textFill="#757575" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../imagens/Airport%20Security2_30px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btnSair" alignment="BASELINE_LEFT" onMouseClicked="#CloseWindows" prefHeight="42.0" prefWidth="199.0" styleClass="side-buttons" text="Sair" textFill="#757575" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#757575" glyphName="CLOSE" size="22" wrappingWidth="27.0" />
+                                       </graphic>
+                                    </JFXButton>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="paneCambioWindows" prefHeight="550.0" prefWidth="900.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

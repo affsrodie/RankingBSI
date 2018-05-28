@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="holderPaneEdit" onMouseClicked="#DissableButtons" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.Usuarios.GerenciarMedicoController">
+   <children>
+      <JFXButton fx:id="btn_Excluir" alignment="CENTER" disable="true" layoutX="947.0" layoutY="270.0" onMouseClicked="#selectMedicoExcluir" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm;" text="EXCLUIR" textFill="#c32a0c" AnchorPane.rightAnchor="40.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView fill="#cd172c" glyphName="DELETE" size="25.0" wrappingWidth="22.000005185604095" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="btn_Editar" disable="true" layoutX="947.0" layoutY="208.0" onMouseClicked="#selectMedicoEdit" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm;" text="EDITAR" textFill="#294fe4" AnchorPane.rightAnchor="40.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <graphic>
+            <MaterialDesignIconView fill="#506ae8" glyphName="TOOLTIP_EDIT" size="25.0" text="" wrappingWidth="22.000005185604095" />
+         </graphic>
+      </JFXButton>
+      <JFXTreeTableView fx:id="tblFindMedicos" layoutX="47.0" layoutY="191.0" onMouseClicked="#EnnableButtonsMouse" prefHeight="385.0" prefWidth="864.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="190.0">
+         <columnResizePolicy>
+            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </JFXTreeTableView>
+      <Pane layoutX="180.0" layoutY="91.0" prefHeight="72.0" prefWidth="618.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-background-color: rgb(20, 95, 183,0.6);">
+         <children>
+            <JFXTextField fx:id="tfdFindNome" layoutX="168.0" layoutY="18.0" prefHeight="40.0" prefWidth="371.0" promptText="NOME" unFocusColor="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXComboBox fx:id="jcbTipoPesquisa" layoutX="7.0" layoutY="27.0" prefHeight="31.0" prefWidth="152.0" unFocusColor="WHITE" />
+            <JFXButton fx:id="btn_Pesquisar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="544.0" layoutY="23.0" onMouseClicked="#pesquisarMedico" prefHeight="31.0" prefWidth="55.0" textFill="#fcfafa">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="30" wrappingWidth="38.99999558925629" />
+               </graphic>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane layoutX="75.0" layoutY="79.0" prefHeight="95.0" prefWidth="98.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 1.5cm; -fx-background-color: rgb(20, 95, 183,0.6);">
+         <children>
+            <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_CIRCLE" layoutX="1.0" layoutY="83.0" size="95" wrappingWidth="69.0000051856041" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

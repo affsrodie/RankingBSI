@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="StackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <JFXToolbar prefHeight="97.0" prefWidth="1100.0" style="-fx-background-color: #268d96;">
+               <center>
+                  <Label prefHeight="82.0" prefWidth="349.0" text="Adicionar Conta" textFill="#f2f2f2" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <FontAwesomeIconView fill="#eff1f5" glyphName="MONEY" size="80" wrappingWidth="101.99999678134918" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </center>
+            </JFXToolbar>
+            <AnchorPane prefHeight="430.0" prefWidth="1100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label layoutX="21.0" layoutY="145.0" prefHeight="241.0" prefWidth="880.0" style="-fx-background-color: #ffff;" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Pane layoutX="117.0" layoutY="18.0" prefHeight="90.0" prefWidth="89.0" style="-fx-background-radius: 1.5cm; -fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
+                     <children>
+                        <Pane layoutX="14.0" layoutY="11.0" prefHeight="67.0" prefWidth="623.0" style="-fx-background-radius: 0cm; -fx-background-color: #ffff;">
+                           <children>
+                              <Label fx:id="infoNomePaciente" layoutX="63.0" layoutY="11.0" prefHeight="36.0" prefWidth="414.0" textFill="#5b76a1">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="tfdNomeEntrada" labelFloat="true" layoutX="90.0" layoutY="25.0" prefHeight="30.0" prefWidth="449.0" promptText="NOME DA ENTRADA">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </JFXTextField>
+                           </children>
+                        </Pane>
+                        <FontAwesomeIconView fill="#2e9e5b" glyphName="MONEY" layoutX="17.0" layoutY="68.0" rotate="-90.0" size="70" wrappingWidth="54.99999678134918" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="119.0" layoutY="127.0" prefHeight="251.0" prefWidth="637.0" style="-fx-background-radius: 0cm; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: #ffff;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="119.0" AnchorPane.topAnchor="127.0">
+                     <children>
+                        <DatePicker fx:id="tfdDataLancamento" layoutX="57.0" layoutY="210.0" prefHeight="32.0" prefWidth="230.0" />
+                        <Label layoutX="57.0" layoutY="182.0" text="Data de Lançamento">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="tfdValor" labelFloat="true" layoutX="57.0" layoutY="145.0" onKeyReleased="#tfdValorKeyRelased" promptText="VALOR" />
+                        <JFXTextField fx:id="tfdCPF" labelFloat="true" layoutX="57.0" layoutY="30.0" prefHeight="32.0" prefWidth="539.0" promptText="CPF" />
+                        <JFXTextField fx:id="tfdEndereco" labelFloat="true" layoutX="57.0" layoutY="87.0" prefHeight="32.0" prefWidth="539.0" promptText="ENDEREÇO" />
+                        <JFXTextField fx:id="tfdReferencia" labelFloat="true" layoutX="229.0" layoutY="139.0" prefHeight="32.0" prefWidth="367.0" promptText="REFERENCIA:" />
+                     </children>
+                  </Pane>
+                  <Label layoutY="403.0" prefHeight="67.0" prefWidth="900.0" style="-fx-background-color: #268d96;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <JFXButton fx:id="btnSalvar" alignment="BASELINE_LEFT" layoutX="256.0" layoutY="402.0" onMouseClicked="#SalvarConta" prefHeight="36.0" prefWidth="120.0" style="-fx-background-color: #FFFF; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" styleClass="side-buttons" text="SALVAR" textFill="#1f51a8" AnchorPane.bottomAnchor="15.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIconView fill="#4c6ab2" glyphName="SAVE" size="22" wrappingWidth="24.0" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCancelar" alignment="BASELINE_LEFT" layoutX="471.0" layoutY="402.0" onMouseClicked="#CloseWindows" prefHeight="36.0" prefWidth="134.0" style="-fx-background-color: #FFFF; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" styleClass="side-buttons" text="CANCELAR" textFill="#1f51a8" AnchorPane.bottomAnchor="15.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="#4c6ab2" glyphName="CLOSE" size="24" wrappingWidth="26.000005185604095" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

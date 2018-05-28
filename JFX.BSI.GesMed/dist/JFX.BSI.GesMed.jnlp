@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="JFX.BSI.GesMed.jnlp">
+  <information>
+    <title>JFX.BSI.GesMed</title>
+    <vendor>Leoncio Carioca</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="JFX.BSI.GesMed.jar" size="695476" download="eager" />
+    <jar href="lib\antlr-2.7.7.jar" size="445288" download="eager" />
+    <jar href="lib\classmate-1.3.0.jar" size="64110" download="eager" />
+    <jar href="lib\controlsfx-8.40.14.jar" size="1215643" download="eager" />
+    <jar href="lib\dom4j-1.6.1.jar" size="313898" download="eager" />
+    <jar href="lib\fontawesomefx-8.9.jar" size="571068" download="eager" />
+    <jar href="lib\hibernate-commons-annotations-5.0.1.Final.jar" size="75288" download="eager" />
+    <jar href="lib\hibernate-core-5.2.16.Final.jar" size="6728526" download="eager" />
+    <jar href="lib\hibernate-entitymanager-5.2.16.Final.jar" size="591" download="eager" />
+    <jar href="lib\hibernate-jpa-2.1-api-1.0.0.Final.jar" size="113371" download="eager" />
+    <jar href="lib\iText-5.0.5.jar" size="2287148" download="eager" />
+    <jar href="lib\jandex-2.0.3.Final.jar" size="186741" download="eager" />
+    <jar href="lib\javafx-swt.jar" size="36262" download="eager" />
+    <jar href="lib\javassist-3.22.0-GA.jar" size="739582" download="eager" />
+    <jar href="lib\jboss-logging-3.3.1.Final.jar" size="66023" download="eager" />
+    <jar href="lib\jboss-transaction-api_1.2_spec-1.0.1.Final.jar" size="28352" download="eager" />
+    <jar href="lib\jfoenix-8.0.1.jar" size="2405715" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.46.jar" size="1004838" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JFX.BSI.GesMed" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="JFX.BSI.GesMed.Interfaces.OpenGesMed"  name="JFX.BSI.GesMed" />
+  <update check="always"/>
+</jnlp>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="rootGesMed" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.Agenda.MainAgendasController">
+   <top>
+      <AnchorPane prefHeight="139.0" prefWidth="1200.0" style="-fx-background-color: #00BFB1;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="popUpMenu" layoutX="684.0" layoutY="4.0" onMouseClicked="#openDialog" prefHeight="130.0" prefWidth="202.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.4cm;" visible="false">
+               <children>
+                  <MaterialDesignIconView fx:id="btn_Menu12" fill="#0961b9" glyphName="VIEW_LIST" layoutX="14.0" layoutY="29.0" opacity="0.55" size="25" strokeDashOffset="9.0" strokeType="OUTSIDE" strokeWidth="6.0" wrappingWidth="31.0" />
+                  <Label layoutX="45.0" layoutY="10.0" text="Outras" textFill="#08833d">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btn_AgendarConsulta" alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="47.0" onMouseClicked="#openAgendarConsulta" prefHeight="42.0" prefWidth="180.0" text=" Agendar Consulta" textFill="#2b8067">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/AgendarConsulta_32px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_ListaEspera" alignment="BOTTOM_LEFT" layoutX="13.0" layoutY="83.0" onMouseClicked="#openListaEspera" prefHeight="42.0" prefWidth="180.0" text=" Lista de Espera" textFill="#2b8067">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/ListaEspera_32px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <JFXButton fx:id="btn_Menu" contentDisplay="GRAPHIC_ONLY" layoutY="100.0" onMouseClicked="#openDialog" prefHeight="46.0" prefWidth="59.0" text="MENU">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/Pull%20Down_40px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="177.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/TitleWindows/Agenda_50px.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="284.0" layoutY="59.0" prefHeight="35.0" prefWidth="99.0" text="Agenda" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTreeTableView fx:id="tblAgendamento" layoutX="20.0" layoutY="68.0" onMouseClicked="#getAgendamentoSelectRow" prefHeight="406.0" prefWidth="775.0" stylesheets="@TreeView.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="222.0">
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <columns>
+                  <TreeTableColumn maxWidth="100.0" minWidth="40.0" prefWidth="50.0" text="ID" />
+                  <TreeTableColumn maxWidth="1000.0" minWidth="400.0" prefWidth="400.0" text="NOME DO PACIENTE" />
+                  <TreeTableColumn maxWidth="1000.0" minWidth="80.0" prefWidth="90.0" text="STATUS" />
+               </columns>
+            </JFXTreeTableView>
+            <AnchorPane fx:id="paneContacts" layoutX="805.0" layoutY="140.0" prefHeight="264.0" prefWidth="203.0" style="-fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="145.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <JFXButton fx:id="btn_AddPhone" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="162.0" layoutY="227.0" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #4687FF; -fx-background-radius: 1cm;" text="ADD" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="-1.0">
+                     <graphic>
+                        <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="28" stroke="WHITE" wrappingWidth="26.0" />
+                     </graphic>
+                  </JFXButton>
+                  <Pane layoutX="63.0" layoutY="-38.0" prefHeight="74.0" prefWidth="71.0" style="-fx-background-radius: 4cm; -fx-background-color: #ffff;">
+                     <children>
+                        <MaterialDesignIconView fill="#3ecdb5" glyphName="PHONE_LOG" layoutX="12.0" layoutY="50.0" size="45" wrappingWidth="26.000005185604095" />
+                     </children>
+                  </Pane>
+                  <Label fx:id="infoPhonePessoal" layoutX="7.0" layoutY="37.0" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm; -fx-border-radius: 0.3cm; -fx-border-color: #3ecdb5;" text="Pessoal" textFill="#24d39c">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="#3ecdb5" glyphName="CELLPHONE_ANDROID" size="28" wrappingWidth="26.000005185604095" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="infoPhoneRecado" layoutX="8.0" layoutY="80.0" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm; -fx-border-radius: 0.3cm; -fx-border-color: #3ecdb5;" text="Para recado" textFill="#24d39c">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="#3ecdb5" glyphName="CELLPHONE_BASIC" size="28" wrappingWidth="26.000005185604095" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="infoPhoneFixo" layoutX="8.0" layoutY="123.0" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm; -fx-border-radius: 0.3cm; -fx-border-color: #3ecdb5;" text="Fixo" textFill="#24d39c">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="#3ecdb5" glyphName="PHONE_FORWARD" size="28" wrappingWidth="26.000005185604095" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="infoPhoneTrabalho" layoutX="9.0" layoutY="167.0" prefHeight="37.0" prefWidth="192.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.3cm; -fx-border-radius: 0.3cm; -fx-border-color: #3ecdb5;" text="Trabalho" textFill="#24d39c">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <MaterialDesignIconView fill="#3ecdb5" glyphName="DESKPHONE" size="28" wrappingWidth="26.000005185604095" />
+                     </graphic>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <JFXTextField fx:id="tfdNome" focusColor="#12b29d" labelFloat="true" layoutX="60.0" layoutY="32.0" onKeyReleased="#procurarPorNome" prefHeight="31.0" prefWidth="495.0" promptText="NOME DO PACIENTE" unFocusColor="#13ab7b">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <VBox prefHeight="504.0" prefWidth="214.0" styleClass="side-bar" stylesheets="@../custom.css" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="paneLateral" prefHeight="112.0" prefWidth="198.0" />
+            <AnchorPane fx:id="paneLatOptions" prefHeight="309.0" prefWidth="203.0">
+               <children>
+                  <Label layoutX="8.0" layoutY="21.0" prefHeight="25.0" prefWidth="167.0" text="Data de Agendamento" textFill="#655858">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXDatePicker fx:id="tfdDataAgendamento" layoutX="14.0" layoutY="45.0" prefHeight="49.0" prefWidth="184.0" />
+                  <JFXComboBox fx:id="jcbStatus" layoutX="11.0" layoutY="125.0" prefHeight="36.0" prefWidth="183.0" />
+                  <Label layoutX="11.0" layoutY="100.0" prefHeight="25.0" prefWidth="63.0" text="Status" textFill="#655858">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btnAtualizar" layoutX="10.0" layoutY="255.0" onMouseClicked="#btnAtualizar" prefHeight="40.0" prefWidth="192.0" ripplerFill="#3bcdc1" style="-fx-background-color: #FFFF; -fx-background-radius: 0.2cm;" text="ATUALIZAR" textFill="#0a9a6f">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

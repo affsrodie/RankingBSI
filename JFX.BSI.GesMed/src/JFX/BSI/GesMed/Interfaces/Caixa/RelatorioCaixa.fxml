@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="StackPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.Caixa.RelatorioCaixaController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" StackPane.alignment="CENTER">
+         <children>
+            <JFXToolbar prefHeight="100.0" prefWidth="1200.0" style="-fx-background-color: #F87951;">
+               <center>
+                  <Label text="RELATÓRIOS" textFill="#fcfcfc" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="83.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../imagens/Transaction_70px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </center>
+            </JFXToolbar>
+            <TabPane prefHeight="500.0" prefWidth="1200.0" stylesheets="@mainCaixa.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="SOMETIMES">
+              <tabs>
+                <Tab text="Entrada e Saída">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="1200.0">
+                           <children>
+                              <JFXTreeTableView fx:id="tblEntradaSaida" layoutX="20.0" layoutY="102.0" prefHeight="335.0" prefWidth="1100.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="102.0">
+                                 <columns>
+                                    <TreeTableColumn prefWidth="431.0" text="RECEBIDO DE" />
+                                    <TreeTableColumn prefWidth="346.0" text="REFERENTE A" />
+                                    <TreeTableColumn prefWidth="180.0" text="DATA DE PAGAMENTO" />
+                                    <TreeTableColumn prefWidth="160.0" text="TIPO" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </JFXTreeTableView>
+                              <JFXButton fx:id="btn_GerarRelatorIO" layoutX="986.0" layoutY="60.0" onMouseClicked="#GerarReceitaES" prefHeight="36.0" prefWidth="182.0" style="-fx-background-color: #FFC39F;" text="GERAR RELATÓRIO" textFill="#148397" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="56.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="FILE_TEXT_ALT" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_VoltarCaixaIO" layoutX="40.0" layoutY="57.0" onMouseClicked="#openMainCaixa" prefHeight="36.0" prefWidth="209.0" style="-fx-background-color: #FFC39F;" text="VOLTAR PARA O CAIXA" textFill="#148397" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="56.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="EXTERNAL_LINK" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <DatePicker fx:id="tfdDataRelatorioIO" layoutX="494.0" layoutY="57.0" prefHeight="35.0" prefWidth="174.0" />
+                              <JFXButton fx:id="btn_UpdateIO" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="451.0" layoutY="57.0" onMouseClicked="#SelectTypeQueryRelatorio" prefHeight="35.0" prefWidth="40.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="REFRESH" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <Group fx:id="groupEntradaSaida" layoutX="294.0" layoutY="73.0" onMouseClicked="#SelectTypeQueryRelatorio" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="58.0">
+                                 <children>
+                                    <ToggleButton fx:id="btn_DIA_ES" mnemonicParsing="false" onMouseClicked="#setSelectBTN_DIA_ES" style="-fx-border-color: #148397; -fx-border-width: 2;" text="DIA" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="btn_MES_ES" layoutX="39.0" mnemonicParsing="false" onMouseClicked="#setSelectBTN_MES_ES" style="-fx-border-color: #148397; -fx-border-width: 2;" text="MÊS" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="btn_ANO_ES" layoutX="82.0" mnemonicParsing="false" onMouseClicked="#setSelectBTN_ANO_ES" style="-fx-border-color: #148397; -fx-border-width: 2;" text="ANO" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                 </children>
+                              </Group>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Entrada">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTreeTableView fx:id="tblEntrada" layoutX="14.0" layoutY="86.0" prefHeight="335.0" prefWidth="1100.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="102.0">
+                                 <columns>
+                                    <TreeTableColumn prefWidth="398.0" text="RECEBIDO DE" />
+                                    <TreeTableColumn prefWidth="384.0" text="REFERENTE A" />
+                                    <TreeTableColumn prefWidth="204.0" text="DATA DE PAGAMENTO" />
+                                    <TreeTableColumn prefWidth="132.0" text="TIPO" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </JFXTreeTableView>
+                              <JFXButton fx:id="btn_GerarRelatorI" layoutX="986.0" layoutY="56.0" onMouseClicked="#GerarReceitaE" prefHeight="36.0" prefWidth="179.0" style="-fx-background-color: #FFC39F;" text="GERAR RELATÓRIO" textFill="#148397" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="56.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="FILE_TEXT_ALT" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_VoltarCaixaI" alignment="CENTER" onMouseClicked="#openMainCaixa" prefHeight="36.0" prefWidth="208.0" style="-fx-background-color: #FFC39F;" text="VOLTAR PARA O CAIXA" textFill="#148397" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="56.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="EXTERNAL_LINK" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <DatePicker fx:id="tfdDataRelatorioI" layoutX="493.0" layoutY="57.0" prefHeight="35.0" prefWidth="174.0" AnchorPane.topAnchor="57.0" />
+                              <JFXButton fx:id="btn_UpdateI" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="450.0" layoutY="58.0" onMouseClicked="#SelectTypeQueryRelatorio" prefHeight="35.0" prefWidth="40.0" AnchorPane.topAnchor="58.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="REFRESH" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <Group fx:id="groupEntrada" layoutX="271.0" layoutY="58.0" onMouseClicked="#SelectTypeQueryRelatorio" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="58.0">
+                                 <children>
+                                    <ToggleButton fx:id="btn_DIA_E" mnemonicParsing="false" onMouseClicked="#setSelectBTN_DIA_E" style="-fx-border-color: #148397; -fx-border-width: 2;" text="DIA" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="btn_MES_E" layoutX="39.0" mnemonicParsing="false" onMouseClicked="#setSelectBTN_MES_E" style="-fx-border-color: #148397; -fx-border-width: 2;" text="MÊS" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="btn_ANO_E" layoutX="82.0" mnemonicParsing="false" onMouseClicked="#setSelectBTN_ANO_E" style="-fx-border-color: #148397; -fx-border-width: 2;" text="ANO" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                 </children>
+                              </Group>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab fx:id="btn_GerarRelatorO" text="Saída">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTreeTableView fx:id="tblSaida" prefHeight="335.0" prefWidth="1100.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="102.0">
+                                 <columns>
+                                    <TreeTableColumn prefWidth="434.0" text="RECEBIDO DE" />
+                                    <TreeTableColumn prefWidth="368.0" text="REFERENTE A" />
+                                    <TreeTableColumn prefWidth="161.0" text="DATA DE PAGAMENTO" />
+                                    <TreeTableColumn prefWidth="155.0" text="TIPO" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </JFXTreeTableView>
+                              <JFXButton layoutX="302.0" layoutY="59.0" onMouseClicked="#GerarReceitaS" prefHeight="36.0" prefWidth="178.0" style="-fx-background-color: #FFC39F;" text="GERAR RELATÓRIO" textFill="#148397" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="58.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="FILE_TEXT_ALT" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="btn_VoltarCaixaO" alignment="CENTER" onMouseClicked="#openMainCaixa" prefHeight="36.0" prefWidth="209.0" style="-fx-background-color: #FFC39F;" text="VOLTAR PARA O CAIXA" textFill="#148397" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="58.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="EXTERNAL_LINK" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <DatePicker fx:id="tfdDataRelatorioO" layoutX="494.0" layoutY="57.0" prefHeight="35.0" prefWidth="174.0" AnchorPane.topAnchor="57.0" />
+                              <JFXButton fx:id="btn_UpdateO" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="451.0" layoutY="57.0" onMouseClicked="#SelectTypeQueryRelatorio" prefHeight="35.0" prefWidth="40.0" text="Button" AnchorPane.topAnchor="57.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="#148397" glyphName="REFRESH" size="25" wrappingWidth="26.999996781349182" />
+                                 </graphic>
+                              </JFXButton>
+                              <Group fx:id="groupSaida" layoutX="271.0" layoutY="73.0" onMouseClicked="#SelectTypeQueryRelatorio" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="58.0">
+                                 <children>
+                                    <ToggleButton fx:id="btn_DIA_S" mnemonicParsing="false" onMouseClicked="#setSelectBTN_DIA_S" style="-fx-border-color: #148397; -fx-border-width: 2;" text="DIA" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="btn_MES_S" layoutX="39.0" mnemonicParsing="false" onMouseClicked="#setSelectBTN_MES_S" style="-fx-border-color: #148397; -fx-border-width: 2;" text="MÊS" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="btn_ANO_S" layoutX="82.0" mnemonicParsing="false" onMouseClicked="#setSelectBTN_ANO_S" style="-fx-border-color: #148397; -fx-border-width: 2;" text="ANO" textFill="#148397">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </ToggleButton>
+                                 </children>
+                              </Group>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="54.0" layoutY="25.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-radius: 1.5cm; -fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" AnchorPane.leftAnchor="100.0">
+         <children>
+            <Pane layoutX="31.0" layoutY="7.0" prefHeight="82.0" prefWidth="709.0" style="-fx-background-radius: 0cm; -fx-background-color: #ffff;">
+               <children>
+                  <Label layoutX="109.0" layoutY="23.0" text="Leonardo dos Reis Grangeiro Carioca" textFill="#5b76a1">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <FontAwesomeIconView fill="#7387a8" glyphName="USER" layoutX="18.0" layoutY="76.0" size="80" wrappingWidth="68.99999678134918" />
+         </children>
+      </Pane>
+      <AnchorPane layoutX="94.0" layoutY="140.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: #FFFF;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="145.0">
+         <children>
+            <JFXTextField fx:id="tfdMedicamento" labelFloat="true" layoutX="22.0" layoutY="44.0" prefHeight="36.0" prefWidth="314.0" promptText="MEDICAMENTO" AnchorPane.leftAnchor="25.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextArea fx:id="tfdObservacoes" labelFloat="true" layoutX="22.0" layoutY="121.0" prefHeight="88.0" prefWidth="314.0" promptText="OBSERVAÇÕES" AnchorPane.leftAnchor="25.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextArea>
+            <JFXTextField fx:id="tfdQtdHoras" labelFloat="true" layoutX="22.0" layoutY="253.0" onKeyReleased="#tfdQtdHorasKeyRelased" prefHeight="36.0" prefWidth="151.0" promptText="QUANT. HORAS" AnchorPane.leftAnchor="25.0" />
+            <JFXTreeTableView fx:id="tblReceitaMedica" layoutX="409.0" layoutY="10.0" prefHeight="314.0" prefWidth="373.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="357.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <columns>
+                  <TreeTableColumn prefWidth="252.0" text="MEDICAMENTO" />
+                  <TreeTableColumn prefWidth="119.0" text="QUANT" />
+               </columns>
+               <columnResizePolicy>
+                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </JFXTreeTableView>
+            <JFXButton fx:id="btnAdicionar" alignment="BASELINE_LEFT" layoutX="205.0" layoutY="257.0" onMouseClicked="#addTabelaMedicamentos" prefHeight="36.0" prefWidth="127.0" style="-fx-background-color: #FFFF;" text="ADICIONAR" textFill="#1f51a8">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#4c6ab2" glyphName="PLUS" size="22" wrappingWidth="24.0" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <JFXToolbar prefHeight="71.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <center>
+            <JFXButton fx:id="btnGerarReceita" alignment="BASELINE_LEFT" onMouseClicked="#GerarReceita" prefHeight="36.0" prefWidth="163.0" style="-fx-background-color: #FFFF; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" styleClass="side-buttons" text="GERAR RECEITA" textFill="#1f51a8" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#4c6ab2" glyphName="SAVE" size="22" wrappingWidth="24.0" />
+               </graphic>
+            </JFXButton>
+         </center>
+      </JFXToolbar>
+   </children>
+</AnchorPane>

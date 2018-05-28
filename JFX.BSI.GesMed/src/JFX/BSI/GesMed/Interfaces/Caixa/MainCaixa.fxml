@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="StackPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1300.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.Caixa.MainCaixaController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <JFXToolbar prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: #F87951;">
+               <center>
+                  <Label text="Caixa" textFill="#fcfcfc" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="83.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../imagens/Transaction_70px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </center>
+            </JFXToolbar>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1300.0" VBox.vgrow="SOMETIMES">
+               <children>
+                  <JFXButton fx:id="btnRelatorios" layoutX="329.0" layoutY="83.0" onMouseClicked="#openRelatorioCaixa" prefHeight="40.0" prefWidth="199.0" style="-fx-background-color: #FFF; -fx-border-color: #8DA6BF;" text="RELATÓRIOS" textFill="#148397">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_NovaEntrada" layoutX="82.0" layoutY="397.0" onMouseClicked="#openAdicionarEntrada" prefHeight="40.0" prefWidth="199.0" style="-fx-background-color: #FFF; -fx-border-color: #8DA6BF;" text="NOVA ENTRADA" textFill="#148397">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_NovaSaida" layoutX="304.0" layoutY="397.0" onMouseClicked="#openAdicionarDespesa" prefHeight="40.0" prefWidth="199.0" style="-fx-background-color: #FFF; -fx-border-color: #8DA6BF;" text="NOVA SAIDA" textFill="#148397">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <AnchorPane layoutX="52.0" layoutY="136.0" prefHeight="246.0" prefWidth="476.0" style="-fx-background-color: #FFFBDA; -fx-border-color: #FF9D73;">
+                     <children>
+                        <Pane layoutX="20.0" layoutY="55.0" prefHeight="59.0" prefWidth="6.0" style="-fx-background-color: #FF9D73;" />
+                        <Label layoutX="33.0" layoutY="55.0" text="VOCÊ FECHOU O MÊS ANTERIOR">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="298.0" layoutY="67.0" text="R$ 0,00">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="19.0" layoutY="136.0" prefHeight="59.0" prefWidth="6.0" style="-fx-background-color: #FF9D73;" />
+                        <Label layoutX="104.0" layoutY="139.0" text="PARA O MÊS ATUAL ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="298.0" layoutY="151.0" prefHeight="35.0" prefWidth="156.0" text="R$ 0,00">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="244.0" prefWidth="11.0" style="-fx-background-color: #FF9D73;" />
+                        <Label layoutX="34.0" layoutY="166.0" text="A PREVISÃO DE FECHAMENTO É:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="130.0" layoutY="80.0" text="COM BALANÇO DE:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <FontAwesomeIconView fill="#c44925" glyphName="CALENDAR_ALT" layoutX="76.0" layoutY="111.0" size="40" wrappingWidth="47.0000057220459" />
+                  <Label layoutX="123.0" layoutY="81.0" text="Janeiro de 2018" textFill="#da3e1f">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

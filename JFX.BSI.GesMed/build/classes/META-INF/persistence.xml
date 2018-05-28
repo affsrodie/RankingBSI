@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="GesmedJPA">
+    <description> Spring Hibernate JPA Configuration Example</description>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>JFX.BSI.GesMed.Entidades.Agendamento</class>
+    <class>JFX.BSI.GesMed.Entidades.Atendente</class>
+    <class>JFX.BSI.GesMed.Entidades.Consulta</class>
+    <class>JFX.BSI.GesMed.Entidades.Conta</class>
+    <class>JFX.BSI.GesMed.Entidades.ContaPaciente</class>
+    <class>JFX.BSI.GesMed.Entidades.Endereco</class>
+    <class>JFX.BSI.GesMed.Entidades.Especializacao</class>
+    <class>JFX.BSI.GesMed.Entidades.Exame</class>
+    <class>JFX.BSI.GesMed.Entidades.Favorecido</class>
+    <class>JFX.BSI.GesMed.Entidades.Medico</class>
+    <class>JFX.BSI.GesMed.Entidades.Paciente</class>
+    <class>JFX.BSI.GesMed.Entidades.Pessoa</class>
+    <class>JFX.BSI.GesMed.Entidades.PlanoSaude</class>
+    <class>JFX.BSI.GesMed.Entidades.Telefone</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gesmedfx"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="aluno"/>
+      <property name="javax.persistence.jdbc.password" value="aluno"/>
+      <property name="hibernate.show_sql" value="false"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
+</persistence>
