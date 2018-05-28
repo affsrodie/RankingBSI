@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="returnCadastroMed" prefHeight="459.0" prefWidth="293.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <effect>
+      <DropShadow />
+   </effect>
+   <children>
+      <JFXTextField fx:id="tfdCRM" focusColor="#2397e4" labelFloat="true" layoutX="50.0" layoutY="97.0" onKeyReleased="#tfdCRMKeyRelased" prefHeight="35.0" prefWidth="194.0" promptText="C.R.M." AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="49.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="cbxEspecialidade" labelFloat="true" layoutX="50.0" layoutY="169.0" prefHeight="30.0" prefWidth="194.0" promptText="Especialidade" />
+      <Pane layoutX="65.0" layoutY="-22.0" prefHeight="42.0" prefWidth="142.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-background-color: rgb(20, 95, 183,0.6);">
+         <children>
+            <Label layoutX="7.0" layoutY="4.0" prefHeight="35.0" prefWidth="137.0" text="Outros Dados" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXPasswordField fx:id="passSenha" layoutX="60.0" layoutY="308.0" prefHeight="35.0" prefWidth="194.0" promptText="SENHA" />
+      <JFXPasswordField fx:id="passSenhaConfirma" layoutX="60.0" layoutY="372.0" prefHeight="35.0" prefWidth="194.0" promptText="CONFIRMAR SENHA" />
+      <FontAwesomeIconView fill="#4975bc" glyphName="USER_MD" layoutX="109.0" layoutY="73.0" size="60" wrappingWidth="38.99999678134918" />
+      <MaterialDesignIconView fill="#7387a8" glyphName="LOCK_OUTLINE" layoutX="20.0" layoutY="337.0" size="25" wrappingWidth="29.999995589256287" />
+      <MaterialDesignIconView fill="#7387a8" glyphName="LOCK_OUTLINE" layoutX="20.0" layoutY="399.0" size="25" wrappingWidth="29.999995589256287" />
+      <MaterialDesignIconView fill="#1a4ea1" glyphName="LOCK_OPEN_OUTLINE" layoutX="19.0" layoutY="277.0" size="30" wrappingWidth="29.999995589256287" />
+      <Label layoutX="64.0" layoutY="257.0" text="Defina sua senha de acesso">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <MaterialDesignIconView fill="#7387a8" glyphName="CERTIFICATE" layoutX="16.0" layoutY="127.0" size="25" wrappingWidth="29.999995589256287" />
+      <MaterialDesignIconView fill="#7387a8" glyphName="SOURCE_FORK" layoutX="15.0" layoutY="195.0" size="25" wrappingWidth="29.999995589256287" />
+      <JFXButton fx:id="btn_Adicionar" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="249.0" layoutY="170.0" onAction="#openNovaEspecialidade" prefHeight="33.0" prefWidth="30.0" style="-fx-background-color: #D9E7FF; -fx-background-radius: 0.9cm;" text="+">
+         <graphic>
+            <MaterialDesignIconView fill="#104494" glyphName="PLUS" size="20" wrappingWidth="19.999995589256287" />
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

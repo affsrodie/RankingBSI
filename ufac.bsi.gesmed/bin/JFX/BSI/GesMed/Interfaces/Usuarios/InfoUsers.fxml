@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.Usuarios.InfoUsersController">
+   <children>
+      <AnchorPane layoutX="9.0" layoutY="177.0" prefHeight="241.0" prefWidth="568.0">
+         <children>
+            <HBox fx:id="groupOptions" layoutY="46.0" prefHeight="195.0" prefWidth="554.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="28.0">
+               <children>
+                  <Group fx:id="groupAtendente">
+                     <children>
+                        <Pane layoutX="6.0" layoutY="39.0" prefHeight="135.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                           <children>
+                              <Pane layoutX="19.0" layoutY="-29.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 170, 207); -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                 <children>
+                                    <FontAwesomeIconView fill="#eeeeee" glyphName="USER" layoutX="17.0" layoutY="79.0" size="80" wrappingWidth="68.99999678134918" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="11.0" layoutY="86.0" minHeight="5.0" prefHeight="5.0" prefWidth="238.0" style="-fx-background-color: #5DB95C; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                              <Label layoutX="19.0" layoutY="104.0" prefHeight="22.0" prefWidth="229.0" text="Gerenciar Atendentes">
+                                 <font>
+                                    <Font name="Roboto Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="160.0" layoutY="4.0" prefHeight="22.0" prefWidth="88.0" text="ATENDENTES" textFill="#8d8b8b">
+                                 <font>
+                                    <Font name="Roboto Black" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="infoCountAtendentes" alignment="TOP_RIGHT" layoutX="159.0" layoutY="41.0" prefHeight="22.0" prefWidth="88.0" text="103">
+                                 <font>
+                                    <Font name="Roboto Black" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Group>
+                  <Group fx:id="groupMedico">
+                     <children>
+                        <Pane layoutX="41.0" layoutY="46.0" prefHeight="135.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                           <children>
+                              <Pane layoutX="19.0" layoutY="-29.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #00B3A0; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                 <children>
+                                    <FontAwesomeIconView fill="#eeeeee" glyphName="USER_MD" layoutX="19.0" layoutY="78.0" size="80" wrappingWidth="68.99999678134918" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="11.0" layoutY="86.0" minHeight="5.0" prefHeight="5.0" prefWidth="238.0" style="-fx-background-color: #5DB95C; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                              <Label layoutX="19.0" layoutY="104.0" prefHeight="22.0" prefWidth="229.0" text="Gerenciar Médicos">
+                                 <font>
+                                    <Font name="Roboto Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="160.0" layoutY="4.0" prefHeight="22.0" prefWidth="88.0" text="MÉDICOS" textFill="#8d8b8b">
+                                 <font>
+                                    <Font name="Roboto Black" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="infoCountMedicos" alignment="TOP_RIGHT" layoutX="159.0" layoutY="41.0" prefHeight="22.0" prefWidth="88.0" text="103">
+                                 <font>
+                                    <Font name="Roboto Black" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Group>
+               </children>
+            </HBox>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <AnchorPane fx:id="paneInfoMedico" layoutX="603.0" layoutY="18.0" prefHeight="520.0" prefWidth="482.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.8cm; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <FontAwesomeIconView fill="#7387a8" glyphName="USER_MD" layoutX="41.0" layoutY="83.0" size="80" wrappingWidth="68.99999678134918" />
+            <Label fx:id="infoNomeUserMed" layoutX="119.0" layoutY="23.0" prefHeight="40.0" prefWidth="353.0" text="Leonardo dos Reis Carioca" textFill="#1d5dab">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <MaterialDesignIconView fill="#7387a8" glyphName="ACCOUNT_LOCATION" layoutX="30.0" layoutY="208.0" size="26" wrappingWidth="27.000010013580322" />
+            <Label fx:id="infoCPFMed" layoutX="134.0" layoutY="223.0" prefHeight="35.0" prefWidth="128.0" text="098.766.785-99" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="178.0" prefHeight="40.0" prefWidth="170.0" text="Dados Pessoais" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="200.0" layoutY="196.0" minHeight="5.0" prefHeight="5.0" prefWidth="229.0" style="-fx-background-color: #7387a8; -fx-border-radius: 5; -fx-background-radius: 5;" />
+            <Label layoutX="84.0" layoutY="223.0" prefHeight="35.0" prefWidth="36.0" text="CPF:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="90.0" layoutY="257.0" prefHeight="35.0" prefWidth="30.0" text="RG:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <MaterialDesignIconView fill="#7387a8" glyphName="MAP_MARKER_RADIUS" layoutX="30.0" layoutY="327.0" size="26" wrappingWidth="27.000010013580322" />
+            <Label layoutX="73.0" layoutY="296.0" prefHeight="40.0" prefWidth="170.0" text="Endereço" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="200.0" layoutY="315.0" minHeight="5.0" prefHeight="5.0" prefWidth="229.0" style="-fx-background-color: #7387a8; -fx-border-radius: 5; -fx-background-radius: 5;" />
+            <Label fx:id="infoRGMed" layoutX="134.0" layoutY="257.0" prefHeight="35.0" prefWidth="128.0" text="2654654635" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="infoBairroMed" layoutX="140.0" layoutY="337.0" prefHeight="35.0" prefWidth="275.0" text="Centro" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="67.0" layoutY="337.0" prefHeight="35.0" prefWidth="52.0" text="Bairro:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="372.0" prefHeight="35.0" prefWidth="36.0" text="Rua:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="infoRuaMed" alignment="TOP_LEFT" layoutX="137.0" layoutY="376.0" prefHeight="52.0" prefWidth="294.0" text="Avenida Ceará" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="67.0" layoutY="106.0" prefHeight="40.0" prefWidth="170.0" text="Dados Médicos" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="200.0" layoutY="124.0" minHeight="5.0" prefHeight="5.0" prefWidth="229.0" style="-fx-background-color: #7387a8; -fx-border-radius: 5; -fx-background-radius: 5;" />
+            <MaterialDesignIconView fill="#7387a8" glyphName="CERTIFICATE" layoutX="30.0" layoutY="137.0" size="25" wrappingWidth="29.999995589256287" />
+            <Label fx:id="infoEspecialidade" layoutX="210.0" layoutY="141.0" prefHeight="35.0" prefWidth="229.0" text="Nutrologia" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <MaterialDesignIconView fill="#7387a8" glyphName="PHONE" layoutX="30.0" layoutY="450.0" size="26" wrappingWidth="27.000010013580322" />
+            <Label layoutX="74.0" layoutY="419.0" prefHeight="40.0" prefWidth="170.0" text="Contatos" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="200.0" layoutY="438.0" minHeight="5.0" prefHeight="5.0" prefWidth="229.0" style="-fx-background-color: #7387a8; -fx-border-radius: 5; -fx-background-radius: 5;" />
+            <Label layoutX="47.0" layoutY="459.0" prefHeight="35.0" prefWidth="77.0" text="Telefone:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="infoTelefoneMed" layoutX="144.0" layoutY="459.0" prefHeight="35.0" prefWidth="275.0" text="(68)99975-6986" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="83.0" layoutY="138.0" prefHeight="40.0" prefWidth="115.0" text="Especialidade:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="tfdFindUsuarios" labelFloat="true" layoutX="181.0" layoutY="142.0" prefHeight="35.0" prefWidth="371.0" promptText="PROCURAR USUÁRIO" unFocusColor="#139a84">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="cbxTipoUsers" labelFloat="true" layoutX="20.0" layoutY="143.0" prefHeight="35.0" prefWidth="146.0" promptText="TIPO USUÁRIO" />
+      <AnchorPane fx:id="paneInfoAtendente" layoutX="603.0" layoutY="18.0" prefHeight="520.0" prefWidth="482.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.8cm; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
+         <children>
+            <FontAwesomeIconView fill="#7387a8" glyphName="USER" layoutX="41.0" layoutY="83.0" size="80" wrappingWidth="68.99999678134918" />
+            <Label fx:id="infoNomeAtendente" layoutX="119.0" layoutY="23.0" prefHeight="40.0" prefWidth="353.0" text="Leonardo dos Reis Carioca" textFill="#1d5dab">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <MaterialDesignIconView fill="#7387a8" glyphName="ACCOUNT_LOCATION" layoutX="30.0" layoutY="176.0" size="26" wrappingWidth="27.000010013580322" />
+            <Label fx:id="infoCPFAtendente" layoutX="193.0" layoutY="184.0" prefHeight="35.0" prefWidth="128.0" text="098.766.785-99" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="146.0" prefHeight="40.0" prefWidth="170.0" text="Dados Pessoais" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="200.0" layoutY="164.0" minHeight="5.0" prefHeight="5.0" prefWidth="229.0" style="-fx-background-color: #7387a8; -fx-border-radius: 5; -fx-background-radius: 5;" />
+            <Label layoutX="143.0" layoutY="184.0" prefHeight="35.0" prefWidth="36.0" text="CPF:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="149.0" layoutY="218.0" prefHeight="35.0" prefWidth="30.0" text="RG:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <MaterialDesignIconView fill="#7387a8" glyphName="MAP_MARKER_RADIUS" layoutX="30.0" layoutY="327.0" size="26" wrappingWidth="27.000010013580322" />
+            <Label layoutX="73.0" layoutY="296.0" prefHeight="40.0" prefWidth="170.0" text="Endereço" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="200.0" layoutY="315.0" minHeight="5.0" prefHeight="5.0" prefWidth="229.0" style="-fx-background-color: #7387a8; -fx-border-radius: 5; -fx-background-radius: 5;" />
+            <Label fx:id="infoRGAtendente" layoutX="193.0" layoutY="218.0" prefHeight="35.0" prefWidth="128.0" text="2654654635" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="infoBairroAtendente" layoutX="166.0" layoutY="335.0" prefHeight="35.0" prefWidth="275.0" text="Centro" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="93.0" layoutY="335.0" prefHeight="35.0" prefWidth="52.0" text="Bairro:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="111.0" layoutY="370.0" prefHeight="35.0" prefWidth="36.0" text="Rua:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="infoRuaAtendente" alignment="TOP_LEFT" layoutX="163.0" layoutY="374.0" prefHeight="52.0" prefWidth="294.0" text="Avenida Ceará" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <MaterialDesignIconView fill="#7387a8" glyphName="PHONE" layoutX="30.0" layoutY="450.0" size="26" wrappingWidth="27.000010013580322" />
+            <Label layoutX="74.0" layoutY="419.0" prefHeight="40.0" prefWidth="170.0" text="Contatos" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="200.0" layoutY="438.0" minHeight="5.0" prefHeight="5.0" prefWidth="229.0" style="-fx-background-color: #7387a8; -fx-border-radius: 5; -fx-background-radius: 5;" />
+            <Label layoutX="73.0" layoutY="457.0" prefHeight="35.0" prefWidth="77.0" text="Telefone:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="infoTelefoneAtendente" layoutX="170.0" layoutY="457.0" prefHeight="35.0" prefWidth="275.0" text="(68)99975-6986" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="252.0" prefHeight="35.0" prefWidth="155.0" text="Data de Admissão:" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="infoDataContratacao" layoutX="193.0" layoutY="254.0" prefHeight="35.0" prefWidth="115.0" text="26/01/2016" textFill="#1d5dab">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

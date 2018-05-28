@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.MainPrincipalController">
+   <children>
+      <VBox fx:id="paneVBox" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Pane prefHeight="224.0" prefWidth="850.0" style="-fx-background-color: rgb(0, 170, 207);" />
+            <Pane layoutX="10.0" layoutY="10.0" prefHeight="377.0" prefWidth="850.0" />
+         </children>
+      </VBox>
+      <StackPane fx:id="paneLogin" StackPane.alignment="CENTER">
+         <children>
+            <AnchorPane cache="true" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <AnchorPane layoutX="358.0" layoutY="103.0" prefHeight="461.0" prefWidth="399.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 3;">
+                     <children>
+                        <JFXTextField fx:id="tfdLoginUser" labelFloat="true" layoutX="58.0" layoutY="167.0" maxWidth="297.0" minWidth="226.0" prefHeight="32.0" prefWidth="300.0" promptText="CPF do Usuário">
+                           <font>
+                              <Font name="Roboto Light" size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXPasswordField fx:id="tfdSenhaUser" labelFloat="true" layoutX="58.0" layoutY="244.0" maxWidth="297.0" minWidth="297.0" prefHeight="32.0" prefWidth="300.0" promptText="Senha do Usuário">
+                           <font>
+                              <Font name="Roboto Light" size="14.0" />
+                           </font>
+                        </JFXPasswordField>
+                        <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="154.0" layoutY="307.0" onAction="#ValidaLogin" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #00718A;" text="ENTRAR" textFill="WHITE">
+                           <font>
+                              <Font name="Roboto Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="imgProgress" fitHeight="64.0" fitWidth="64.0" layoutX="168.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/Preloader_9.gif" />
+                           </image>
+                        </ImageView>
+                        <FontAwesomeIconView fx:id="iconTipoLogin" fill="#7387a8" glyphName="USER" layoutX="160.0" layoutY="74.0" size="80" wrappingWidth="68.99999678134918" />
+                        <JFXComboBox fx:id="cbxTipoUser" layoutX="95.0" layoutY="103.0" prefHeight="32.0" prefWidth="200.0" promptText="TIPO DE USUÁRIO" />
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="401.0" layoutY="21.0" text="Gestão de Clínica Médica - GesMed" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="496.0" layoutY="54.0" text="Tela de Login" textFill="WHITE">
+                     <font>
+                        <Font name="Roboto Light" size="18.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="474.0" layoutY="90.0" opacity="0.9" prefWidth="150.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </children>
+</StackPane>

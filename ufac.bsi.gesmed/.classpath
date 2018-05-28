@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/AbsoluteLayout"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/MySQL"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Calendar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PDFGerator"/>
-	<classpathentry kind="output" path="build/classes"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/JavaFX_Componentes/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/JavaFX_Componentes/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/JavaFX_Componentes/jfoenix-8.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Controlsfx-8.40/controlsfx-8.40.14.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/MySQL/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/classmate-1.3.0.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/hibernate-commons-annotations-5.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/hibernate-core-5.2.16.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/jandex-2.0.3.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/javassist-3.22.0-GA.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/jboss-logging-3.3.1.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/required/jboss-transaction-api_1.2_spec-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/NetBeansProjects/JFX.BSI.GesMed/lib/Hibernate/jpa/hibernate-entitymanager-5.2.16.Final.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>

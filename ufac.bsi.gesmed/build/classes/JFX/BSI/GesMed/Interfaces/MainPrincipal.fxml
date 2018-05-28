@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootPrincipal" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane>
+         <children>
+            <StackPane layoutX="11.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <JFXToolbar prefHeight="144.0" prefWidth="1100.0" style="-fx-background-color: #46A7BF;">
+                           <center>
+                              <Label prefHeight="82.0" prefWidth="253.0" text="GESMED" textFill="#fcfcfc" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="MEDKIT" size="80" wrappingWidth="85.99999678134918" />
+                                 </graphic>
+                              </Label>
+                           </center>
+                        </JFXToolbar>
+                        <AnchorPane prefHeight="61.0" prefWidth="1100.0" style="-fx-background-color: #ffff;">
+                           <children>
+                              <FontAwesomeIconView fx:id="iconUserLogin" fill="#7387a8" glyphName="USER" layoutX="14.0" layoutY="45.0" size="50" wrappingWidth="54.999990463256836" />
+                              <Label fx:id="infoUsuario" layoutX="69.0" layoutY="10.0" text="Usuário" textFill="#5676c3">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="rootGesMed" VBox.vgrow="ALWAYS">
+                           <children>
+                              <AnchorPane fx:id="popUpMenu" onMouseClicked="#openDialog" prefHeight="218.0" prefWidth="202.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.4cm;" visible="false">
+                                 <children>
+                                    <Label layoutX="55.0" layoutY="14.0" text="Outras" textFill="#0f73b5">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <MaterialDesignIconView fx:id="btn_Menu12" fill="#0961b9" glyphName="VIEW_LIST" layoutX="14.0" layoutY="33.0" opacity="0.55" size="25" strokeDashOffset="9.0" strokeType="OUTSIDE" strokeWidth="6.0" wrappingWidth="31.0" />
+                                    <JFXButton fx:id="btn_Usuarios" accessibleRole="TEXT" alignment="BOTTOM_LEFT" layoutX="11.0" layoutY="50.0" onMouseClicked="#openUsuarios" prefHeight="38.0" prefWidth="172.0" text="USUÁRIOS" textFill="#2c7cb5">
+                                       <graphic>
+                                          <MaterialDesignIconView fx:id="btn_Menu1" fill="#0961b9" glyphName="SETTINGS" opacity="0.55" size="30" strokeDashOffset="9.0" strokeType="OUTSIDE" strokeWidth="6.0" wrappingWidth="40.0" />
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btnOptions" accessibleRole="TEXT" alignment="BOTTOM_LEFT" layoutX="11.0" layoutY="88.0" prefHeight="38.0" prefWidth="181.0" text="OPÇÕES" textFill="#2c7cb5">
+                                       <graphic>
+                                          <MaterialDesignIconView fx:id="btn_Menu11" fill="#0961b9" glyphName="SETTINGS" opacity="0.55" size="30" strokeDashOffset="9.0" strokeType="OUTSIDE" strokeWidth="6.0" wrappingWidth="40.0" />
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                              <BorderPane prefHeight="195.0" prefWidth="1100.0" style="-fx-background-color: #ffff;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <center>
+                                    <ImageView fitHeight="235.0" fitWidth="314.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@../images/Icon%20All%20People.png" />
+                                       </image>
+                                    </ImageView>
+                                 </center>
+                              </BorderPane>
+                              <AnchorPane layoutY="169.0" prefHeight="246.0" prefWidth="1100.0" style="-fx-background-color: #ffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="169.0">
+                                 <children>
+                                    <HBox fx:id="groupOptions" layoutY="46.0" prefHeight="195.0" prefWidth="1100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <children>
+                                          <Group fx:id="groupPacientes" onMouseClicked="#openPacientes">
+                                             <children>
+                                                <Pane layoutX="6.0" layoutY="39.0" prefHeight="135.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                                   <children>
+                                                      <Pane layoutX="19.0" layoutY="-29.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: rgb(0, 170, 207); -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                                         <children>
+                                                            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="13.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../images/TitleWindows/Pacientes_70px.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </children>
+                                                      </Pane>
+                                                      <Label layoutX="11.0" layoutY="86.0" minHeight="5.0" prefHeight="5.0" prefWidth="238.0" style="-fx-background-color: #5DB95C; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                                                      <Label layoutX="19.0" layoutY="104.0" prefHeight="22.0" prefWidth="229.0" text="Gerenciar Pacientes">
+                                                         <font>
+                                                            <Font name="Roboto Regular" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" layoutX="160.0" layoutY="4.0" prefHeight="22.0" prefWidth="88.0" text="PACIENTES" textFill="#8d8b8b">
+                                                         <font>
+                                                            <Font name="Roboto Black" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="labelCountPaciente" alignment="TOP_RIGHT" layoutX="159.0" layoutY="41.0" prefHeight="22.0" prefWidth="88.0" text="0">
+                                                         <font>
+                                                            <Font name="Roboto Black" size="24.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </Group>
+                                          <Group fx:id="groupAgenda" onMouseClicked="#openAgenda">
+                                             <children>
+                                                <Pane layoutX="6.0" layoutY="39.0" prefHeight="135.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                                   <children>
+                                                      <Pane layoutX="19.0" layoutY="-29.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #00B3A0; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                                         <children>
+                                                            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../images/TitleWindows/Agenda_50px.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </children>
+                                                      </Pane>
+                                                      <Label layoutX="11.0" layoutY="86.0" minHeight="5.0" prefHeight="5.0" prefWidth="238.0" style="-fx-background-color: #5DB95C; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                                                      <Label layoutX="19.0" layoutY="104.0" prefHeight="22.0" prefWidth="229.0" text="Agendamentos, Consultas e outras">
+                                                         <font>
+                                                            <Font name="Roboto Regular" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" layoutX="160.0" layoutY="4.0" prefHeight="22.0" prefWidth="88.0" text="AGENDA" textFill="#8d8b8b">
+                                                         <font>
+                                                            <Font name="Roboto Black" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="labelCountAgenda" alignment="TOP_RIGHT" layoutX="159.0" layoutY="41.0" prefHeight="22.0" prefWidth="88.0" text="0">
+                                                         <font>
+                                                            <Font name="Roboto Black" size="24.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </Group>
+                                          <Group fx:id="groupContas" onMouseClicked="#openContas">
+                                             <children>
+                                                <Pane layoutX="6.0" layoutY="39.0" prefHeight="135.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                                   <children>
+                                                      <Pane layoutX="19.0" layoutY="-29.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #F87951; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                                         <children>
+                                                            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="13.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../images/TitleWindows/Contas_70px.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </children>
+                                                      </Pane>
+                                                      <Label layoutX="11.0" layoutY="86.0" minHeight="5.0" prefHeight="5.0" prefWidth="238.0" style="-fx-background-color: #5DB95C; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                                                      <Label layoutX="19.0" layoutY="104.0" prefHeight="22.0" prefWidth="229.0" text="Agendar Contas, Entradas e Saídas">
+                                                         <font>
+                                                            <Font name="Roboto Regular" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" layoutX="160.0" layoutY="4.0" prefHeight="22.0" prefWidth="88.0" text="CONTAS" textFill="#8d8b8b">
+                                                         <font>
+                                                            <Font name="Roboto Black" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="labelCountContas" alignment="TOP_RIGHT" layoutX="167.0" layoutY="41.0" prefHeight="35.0" prefWidth="80.0" text="0">
+                                                         <font>
+                                                            <Font name="Roboto Black" size="24.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </Group>
+                                          <Group fx:id="groupCaixa">
+                                             <children>
+                                                <Pane layoutX="6.0" layoutY="39.0" prefHeight="135.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                                   <children>
+                                                      <Pane layoutX="19.0" layoutY="-29.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #1564C0; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                                                         <children>
+                                                            <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../images/TitleWindows/Conta_70px.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </children>
+                                                      </Pane>
+                                                      <Label layoutX="11.0" layoutY="86.0" minHeight="5.0" prefHeight="5.0" prefWidth="238.0" style="-fx-background-color: #5DB95C; -fx-border-radius: 5; -fx-background-radius: 5;" />
+                                                      <Label layoutX="19.0" layoutY="104.0" prefHeight="22.0" prefWidth="229.0" text="Controle de Caixa">
+                                                         <font>
+                                                            <Font name="Roboto Regular" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" layoutX="160.0" layoutY="4.0" prefHeight="22.0" prefWidth="88.0" text="CAIXA" textFill="#8d8b8b">
+                                                         <font>
+                                                            <Font name="Roboto Black" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </AnchorPane>
+                              <JFXButton fx:id="btn_Menu" accessibleRole="TEXT" contentDisplay="GRAPHIC_ONLY" layoutX="5.0" layoutY="5.0" onMouseClicked="#openDialog" prefHeight="53.0" prefWidth="46.0" text="MENU">
+                                 <graphic>
+                                    <MaterialDesignIconView fill="#7387a8" glyphName="MENU" size="40" wrappingWidth="38.000005185604095" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

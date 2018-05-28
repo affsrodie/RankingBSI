@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="rootAgendarConsulta" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.Agenda.AgendarConsultaController">
+   <top>
+      <AnchorPane prefHeight="175.0" prefWidth="750.0" style="-fx-background-color: #00BFB1;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="74.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/TitleWindows/AgendarConsulta_70px.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="168.0" layoutY="77.0" text="Agendar Consulta" textFill="#f8f8f8">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="430.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="449.0" prefWidth="664.0" style="-fx-background-color: #ffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXComboBox fx:id="jcbProcedimento" labelFloat="true" layoutX="150.0" layoutY="151.0" prefHeight="32.0" prefWidth="174.0" promptText="PROCEDIMENTO" />
+                  <JFXComboBox fx:id="jcbConvenio" labelFloat="true" layoutX="148.0" layoutY="210.0" prefHeight="32.0" prefWidth="179.0" promptText="CONVÊNIO" />
+                  <JFXComboBox fx:id="jcbStatus" labelFloat="true" layoutX="437.0" layoutY="151.0" prefHeight="32.0" prefWidth="175.0" promptText="STATUS" />
+                  <JFXDatePicker fx:id="tfdDataAgenda" editable="false" layoutX="437.0" layoutY="210.0" prefHeight="32.0" prefWidth="206.0" promptText="DATA DO AGENDAMENTO" />
+                  <JFXTimePicker fx:id="tfdHrInicio" layoutX="266.0" layoutY="271.0" prefHeight="29.0" prefWidth="105.0" />
+                  <Label layoutX="175.0" layoutY="269.0" prefHeight="34.0" prefWidth="82.0" text="Hora Início:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="390.0" layoutY="269.0" prefHeight="34.0" prefWidth="69.0" text="Hora Fim:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXTimePicker fx:id="tfdHrFim" layoutX="469.0" layoutY="272.0" prefHeight="29.0" prefWidth="104.0" />
+                  <JFXButton fx:id="btnSalvar" layoutX="150.0" layoutY="398.0" onMouseClicked="#salvarAgendamento" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #BDFFD6; -fx-background-radius: 0.4cm;" text="SALVAR" textFill="#069e66" AnchorPane.bottomAnchor="14.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCancelar" layoutX="304.0" layoutY="398.0" onMouseClicked="#ButtonCancel" prefHeight="37.0" prefWidth="110.0" style="-fx-background-color: #BDFFD6; -fx-background-radius: 0.4cm;" text="CANCELAR" textFill="#069e66" AnchorPane.bottomAnchor="14.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXTextField fx:id="tfdCPF" labelFloat="true" layoutX="149.0" layoutY="92.0" prefHeight="31.0" prefWidth="312.0" promptText="CPF">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextArea fx:id="textObservacoes" labelFloat="true" layoutX="149.0" layoutY="331.0" prefHeight="48.0" prefWidth="515.0" promptText="OBSERVAÇÕES:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXTextArea>
+                  <JFXTextField fx:id="tfdNome" labelFloat="true" layoutX="148.0" layoutY="35.0" prefHeight="31.0" prefWidth="312.0" promptText="NOME">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXTextField>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+   <bottom>
+      <AnchorPane prefHeight="26.0" prefWidth="750.0" style="-fx-background-color: #00BFB1;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <VBox prefHeight="432.0" prefWidth="163.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="433.0" prefWidth="150.0">
+               <children>
+                  <JFXButton fx:id="btn_GradeHorario" alignment="TOP_LEFT" layoutX="5.0" layoutY="26.0" prefHeight="39.0" prefWidth="154.0" text="Grade de Horário">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/Search%20Property_30px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton alignment="TOP_LEFT" layoutX="6.0" layoutY="78.0" prefHeight="39.0" prefWidth="153.0" text="Configurações">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/Timer_30px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
