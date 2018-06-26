@@ -16,7 +16,7 @@
    <children>
       <AnchorPane layoutX="58.0" layoutY="36.0" prefHeight="459.0" prefWidth="640.0" style="-fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
          <children>
-            <JFXTextField fx:id="tfdNome" focusColor="#2196f3" labelFloat="true" layoutX="52.0" layoutY="22.0" maxWidth="458.0" minWidth="224.0" prefHeight="35.0" prefWidth="425.0" promptText="Nome Completo">
+            <JFXTextField fx:id="tfdNome" focusColor="#2196f3" labelFloat="true" layoutX="52.0" layoutY="32.0" maxWidth="458.0" minWidth="224.0" prefHeight="35.0" prefWidth="425.0" promptText="Nome Completo">
                <font>
                   <Font name="Roboto Medium" size="14.0" />
                </font>
@@ -31,12 +31,12 @@
                   <Font name="Roboto Medium" size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="tfdTelefone" focusColor="#2196f3" labelFloat="true" layoutX="53.0" layoutY="217.0" maxWidth="295.0" minWidth="206.0" onKeyPressed="#tfdCelularKeyRelased" prefHeight="38.0" prefWidth="206.0" promptText="Telefone ou Celular">
+            <JFXTextField fx:id="tfdTelefone" focusColor="#2196f3" labelFloat="true" layoutX="201.0" layoutY="219.0" maxWidth="295.0" minWidth="206.0" onKeyPressed="#tfdCelularKeyRelased" prefHeight="38.0" prefWidth="206.0" promptText="Telefone ou Celular">
                <font>
                   <Font name="Roboto Medium" size="14.0" />
                </font>
             </JFXTextField>
-            <JFXComboBox fx:id="cbxTipoCelular" labelFloat="true" layoutX="275.0" layoutY="221.0" minWidth="130.0" prefHeight="35.0" prefWidth="130.0" promptText="Tipo de Celular" stylesheets="@combo-size-Material.css" />
+            <JFXComboBox fx:id="cbxTipoCelular" labelFloat="true" layoutX="52.0" layoutY="222.0" minWidth="130.0" prefHeight="35.0" prefWidth="130.0" promptText="Tipo de Contato" stylesheets="@combo-size-Material.css" />
             <JFXDatePicker fx:id="tfdDataNascimento" defaultColor="#618ec9" editable="false" layoutX="53.0" layoutY="278.0" prefHeight="28.0" prefWidth="240.0" promptText="Data de Nascimento" />
             <JFXTextField fx:id="tfdEndereco" focusColor="#2196f3" labelFloat="true" layoutX="52.0" layoutY="337.0" maxWidth="458.0" minWidth="224.0" prefHeight="35.0" prefWidth="359.0" promptText="Rua (Logradouro, Avenida, Rodovia)">
                <font>
@@ -104,15 +104,15 @@
             </Pane>
          </children>
       </AnchorPane>
-      <JFXButton fx:id="btn_Atualizar" alignment="BOTTOM_LEFT" layoutX="138.0" layoutY="505.0" onAction="#atualizarPaciente" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="ATUALIZAR" textFill="#2f75d8" AnchorPane.bottomAnchor="10.0">
+      <JFXButton fx:id="btn_Atualizar" alignment="BOTTOM_LEFT" buttonType="RAISED" layoutX="138.0" layoutY="505.0" onAction="#atualizarPaciente" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #00718A;" text="ATUALIZAR" textFill="WHITE" AnchorPane.bottomAnchor="10.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
          <graphic>
-            <MaterialDesignIconView fill="#0b5cdd" glyphName="BACKUP_RESTORE" size="25" wrappingWidth="26.000005185604095" />
+            <MaterialDesignIconView fill="WHITE" glyphName="BACKUP_RESTORE" size="25" wrappingWidth="26.000005185604095" />
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="btn_ExcluirPaciente" alignment="BOTTOM_LEFT" layoutX="321.0" layoutY="505.0" onAction="#excluirPaciente" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="EXCLUIR" textFill="#d6532f" AnchorPane.bottomAnchor="10.0">
+      <JFXButton fx:id="btn_ExcluirPaciente" alignment="BOTTOM_LEFT" buttonType="RAISED" layoutX="321.0" layoutY="505.0" onAction="#excluirPaciente" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #ffff;" text="EXCLUIR" textFill="#d6532f" AnchorPane.bottomAnchor="10.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -120,7 +120,7 @@
             <MaterialDesignIconView fill="#db2f0b" glyphName="DELETE" size="25" wrappingWidth="26.000005185604095" />
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="btn_Cancelar" alignment="BOTTOM_LEFT" layoutX="473.0" layoutY="506.0" onMouseClicked="#buttonCancelar" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" text="CANCELAR" textFill="#2f75d8" AnchorPane.bottomAnchor="10.0">
+      <JFXButton fx:id="btn_Cancelar" alignment="BOTTOM_LEFT" buttonType="RAISED" layoutX="473.0" layoutY="506.0" onMouseClicked="#buttonCancelar" prefHeight="30.0" prefWidth="137.0" style="-fx-background-color: #ffff;" text="CANCELAR" textFill="#2f75d8" AnchorPane.bottomAnchor="10.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

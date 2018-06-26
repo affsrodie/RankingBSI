@@ -49,6 +49,16 @@ public class MedicoRepositorio {
                 }
 		return NOVO_ID;
 	}
+        
+        @SuppressWarnings("unchecked")
+        public int getQuantMedicos(){
+            long RespDouble;
+            int Result;
+            Query queryDouble = em.createQuery("SELECT COUNT(*) FROM Medico");
+	    RespDouble = (long)queryDouble.getSingleResult();
+            Result = (int) RespDouble;
+            return Result;
+        }
 	
 	@SuppressWarnings("unchecked")
 	public List<Medico> recuperarTodos(){

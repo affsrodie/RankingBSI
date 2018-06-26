@@ -22,49 +22,6 @@
    <top>
       <AnchorPane prefHeight="139.0" prefWidth="1200.0" style="-fx-background-color: #00BFB1;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="popUpMenu" layoutX="684.0" layoutY="4.0" onMouseClicked="#openDialog" prefHeight="130.0" prefWidth="202.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.4cm;" visible="false">
-               <children>
-                  <MaterialDesignIconView fx:id="btn_Menu12" fill="#0961b9" glyphName="VIEW_LIST" layoutX="14.0" layoutY="29.0" opacity="0.55" size="25" strokeDashOffset="9.0" strokeType="OUTSIDE" strokeWidth="6.0" wrappingWidth="31.0" />
-                  <Label layoutX="45.0" layoutY="10.0" text="Outras" textFill="#08833d">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <JFXButton fx:id="btn_AgendarConsulta" alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="47.0" onMouseClicked="#openAgendarConsulta" prefHeight="42.0" prefWidth="180.0" text=" Agendar Consulta" textFill="#2b8067">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/AgendarConsulta_32px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btn_ListaEspera" alignment="BOTTOM_LEFT" layoutX="13.0" layoutY="83.0" onMouseClicked="#openListaEspera" prefHeight="42.0" prefWidth="180.0" text=" Lista de Espera" textFill="#2b8067">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/ListaEspera_32px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </AnchorPane>
-            <JFXButton fx:id="btn_Menu" contentDisplay="GRAPHIC_ONLY" layoutY="100.0" onMouseClicked="#openDialog" prefHeight="46.0" prefWidth="59.0" text="MENU">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/Pull%20Down_40px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
             <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="177.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/TitleWindows/Agenda_50px.png" />
@@ -79,7 +36,7 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane onMouseClicked="#DisableButton" onMouseEntered="#DisableButton" onMouseExited="#DisableButton" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <JFXTreeTableView fx:id="tblAgendamento" layoutX="20.0" layoutY="68.0" onMouseClicked="#getAgendamentoSelectRow" prefHeight="406.0" prefWidth="775.0" stylesheets="@TreeView.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="222.0">
                <columnResizePolicy>
@@ -96,7 +53,7 @@
                   <DropShadow />
                </effect>
                <children>
-                  <JFXButton fx:id="btn_AddPhone" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="162.0" layoutY="227.0" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #4687FF; -fx-background-radius: 1cm;" text="ADD" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="-1.0">
+                  <JFXButton fx:id="btn_AddPhone" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" disable="true" layoutX="162.0" layoutY="227.0" onMouseClicked="#openListTelefoneEdit" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #4687FF; -fx-background-radius: 1cm;" text="ADD" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="-1.0">
                      <graphic>
                         <MaterialDesignIconView fill="WHITE" glyphName="PLUS" size="28" stroke="WHITE" wrappingWidth="26.0" />
                      </graphic>
@@ -145,6 +102,18 @@
                   <Font size="15.0" />
                </font>
             </JFXTextField>
+            <JFXButton fx:id="btn_AgendarConsulta" alignment="BOTTOM_LEFT" layoutX="577.0" layoutY="42.0" onMouseClicked="#openAgendarConsulta" prefHeight="42.0" prefWidth="187.0" text=" Agendar Consulta" textFill="#2b8067">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/AgendarConsulta_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children>
       </AnchorPane>
    </center>

@@ -30,7 +30,7 @@
                <children>
                   <AnchorPane layoutX="358.0" layoutY="103.0" prefHeight="461.0" prefWidth="399.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 3;">
                      <children>
-                        <JFXTextField fx:id="tfdLoginUser" labelFloat="true" layoutX="58.0" layoutY="167.0" maxWidth="297.0" minWidth="226.0" prefHeight="32.0" prefWidth="300.0" promptText="CPF do Usuário">
+                        <JFXTextField fx:id="tfdLoginUser" labelFloat="true" layoutX="58.0" layoutY="167.0" maxWidth="297.0" minWidth="226.0" onKeyReleased="#tfdCPFKeyRelased" prefHeight="32.0" prefWidth="300.0" promptText="CPF do Usuário">
                            <font>
                               <Font name="Roboto Light" size="14.0" />
                            </font>

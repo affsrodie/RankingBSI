@@ -18,6 +18,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,9 +34,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -87,6 +88,9 @@ public class LoginController implements Initializable {
     private Medico medicoLogin;
     private Atendente atendenteLogin;
     
+    private int QUANT_ATEND=-1;
+    private int QUANT_MED=-1;
+    
     //SESSÃO PARA TELA PRINCIPAL
     
     
@@ -106,6 +110,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicializeLogin();
+        CheckQuantidadeUsuarios();
     } 
     
     public void inicializeLogin(){
@@ -418,9 +423,8 @@ public class LoginController implements Initializable {
     }
  
     @FXML
-    private void openAdministrador(MouseEvent event) {
+    private void openAdministrador() {
         try {
-        
         Stage currentStage = (Stage) stackLogin.getScene().getWindow();
         Stage stage = new Stage();
         stage.initOwner(currentStage);
@@ -439,8 +443,59 @@ public class LoginController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(MainAtendenteController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException npe){
+        Stage stage = new Stage();
+        
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initModality(Modality.WINDOW_MODAL);
+        
+        FXMLLoader adminSenhaFXML = new FXMLLoader(LoginController.class.getResource("/JFX/BSI/GesMed/Interfaces/Administrador.fxml"));
+        AdministradorController adminControl = new AdministradorController(this);
+        adminSenhaFXML.setController(adminControl);
+        
+        Parent root = null;
+            try {
+                root = adminSenhaFXML.load();
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
         }
     }
     
+    public void CheckQuantidadeUsuarios(){
+        AtendenteRepositorio atendRep = new AtendenteRepositorio();
+        MedicoRepositorio medRep = new MedicoRepositorio();
+        QUANT_ATEND = atendRep.getQuantAtendentes();
+        QUANT_MED = medRep.getQuantMedicos();
+        int SOMA = 0;
+        if(QUANT_ATEND!=-1&&QUANT_MED!=-1){
+            SOMA = QUANT_ATEND+QUANT_MED;
+        }
+        if(SOMA==0){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        
+        alert.setTitle("Sistema de Login");
+        alert.setHeaderText("Mensagem para Usuários do Sistema");
+        alert.setContentText("Foi identificado que não há usuários registrados no Sistema, clique em OK para cadastrar um usuário");
+        
+        Alert AlertErro = new Alert(Alert.AlertType.ERROR);
+                AlertErro.setTitle("Sistema de Login");
+                AlertErro.setHeaderText("Mensagem para Usuários do Sistema");
+                AlertErro.setContentText("Foi identificado que não há usuários registrados no Sistema. Entre em contato com um Administrador para Registrar um Atendente no Sistema");
+                AlertErro.showAndWait();
+        }
+    }
+    
+    @FXML
+    public void tfdCPFKeyRelased(){
+        TextFieldFormatter tff = new TextFieldFormatter();
+        tff.setMask("###.###.###-##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(tfdLoginUser);
+        tff.formatter();
+    }
     
 }

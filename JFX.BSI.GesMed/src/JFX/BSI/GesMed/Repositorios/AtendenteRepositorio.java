@@ -60,28 +60,29 @@ public class AtendenteRepositorio {
 	}
 	
 	public int gerarID() {
-		List<Atendente> todos = recuperarTodos();
-		int NOVO_ID=1;
+            
+        List<Atendente> todos = recuperarTodos();
+            int NOVO_ID=1;
            if(todos.size()>=1){
               Atendente atendente = todos.get(todos.size()-1);
                     NOVO_ID = atendente.getID() + 1;
             }
-		return NOVO_ID;
+            return NOVO_ID;
 	}
+        
+        @SuppressWarnings("unchecked")
+        public int getQuantAtendentes(){
+            long RespDouble;
+            int Result;
+            Query queryDouble = em.createQuery("SELECT COUNT(*) FROM Atendente");
+	    RespDouble = (long)queryDouble.getSingleResult();
+            Result = (int) RespDouble;
+            return Result;
+        }
 	
 	public void encerrar(){
 		em.close();
 		emf.close();
 	}
-	
-//	@SuppressWarnings("unchecked")
-//	public List<Paciente> recuperarPorStatus(String status)
-//	{
-//		Query query = em.createQuery("SELECT p FROM Paciente p "
-//				+ "WHERE p.status LIKE :status");
-//		query.setParameter("status", "%"+status+"%");
-//		
-//		return query.getResultList();
-//	}
 	
 }

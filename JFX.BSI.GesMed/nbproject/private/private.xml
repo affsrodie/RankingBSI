@@ -3,8 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Caixa/MainCaixaController.java</file>
-            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/OpenGesMed.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Paciente/CadastrarPacienteController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Agenda/ConsultaMedicaController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Agenda/MainAgendasController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Paciente/HomePacienteController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Usuarios/CadastrarMedicoController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/MainAtendenteController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Contas/LancarContaController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Paciente/GerenciarPacientesController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/LoginController.java</file>
+            <file>file:/D:/Documents/NetBeansProjects/JFX.BSI.GesMed/src/JFX/BSI/GesMed/Interfaces/Agenda/ListContactsController.java</file>
         </group>
     </open-files>
 </project-private>

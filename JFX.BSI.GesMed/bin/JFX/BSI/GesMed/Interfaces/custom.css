@@ -152,7 +152,7 @@
  * ComboBox, ChoiceBox COMMON                                                 *
  *                                                                             *
  ******************************************************************************/
-.combo-box-base, .choice-box {
+/*.combo-box-base, .choice-box {
     -fx-background-color: transparent;
     -fx-border-color: -swatch-grey;
     -fx-border-width: 0 0 2 0;
@@ -180,7 +180,7 @@
 .combo-box-base .arrow-button:hover .arrow, .spinner .increment-arrow-button:hover .increment-arrow,
 .spinner .decrement-arrow-button:hover .decrement-arrow {
     -fx-background-color: -swatch-dark-grey;
-}
+}*/
 
 .menu-item:focused {
     -fx-background-color: -swatch-light-grey;

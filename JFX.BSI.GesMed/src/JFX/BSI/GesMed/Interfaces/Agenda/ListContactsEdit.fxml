@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneContactsEdit" prefHeight="264.0" prefWidth="203.0" style="-fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <effect>
+      <DropShadow />
+   </effect>
+   <children>
+      <JFXButton fx:id="btn_Salvar" alignment="CENTER" buttonType="RAISED" layoutX="54.0" layoutY="225.0" onMouseClicked="#Salvar" prefHeight="36.0" prefWidth="104.0" style="-fx-background-color: #58d389; -fx-background-radius: 1CM;" text="SALVAR" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="45.0">
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="25" wrappingWidth="19.999996781349182" />
+         </graphic>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <Pane layoutX="63.0" layoutY="-38.0" prefHeight="74.0" prefWidth="71.0" style="-fx-background-radius: 4cm; -fx-background-color: #ffff;">
+         <children>
+            <MaterialDesignIconView fill="#3ecdb5" glyphName="PHONE_LOG" layoutX="12.0" layoutY="50.0" size="45" wrappingWidth="26.000005185604095" />
+         </children>
+      </Pane>
+      <JFXComboBox fx:id="cbxTipoContato" layoutX="10.0" layoutY="109.0" prefHeight="36.0" prefWidth="186.0" promptText="Tipo de Contato" />
+      <JFXTextField fx:id="tfdTelefone" layoutX="8.0" layoutY="167.0" onKeyReleased="#tfdCelularKeyRelased" prefHeight="36.0" prefWidth="186.0" promptText="Contato" />
+      <JFXComboBox fx:id="cbxStatus" labelFloat="true" layoutX="14.0" layoutY="60.0" prefHeight="36.0" prefWidth="186.0" promptText="STATUS" />
+      <JFXButton alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="167.0" onMouseClicked="#cancelarJanela" prefHeight="25.0" prefWidth="26.0">
+         <graphic>
+            <FontAwesomeIconView fill="#58d389" glyphName="CLOSE" size="25" wrappingWidth="19.999996781349182" />
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

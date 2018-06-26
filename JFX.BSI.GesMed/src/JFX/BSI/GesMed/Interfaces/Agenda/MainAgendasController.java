@@ -8,6 +8,7 @@ package JFX.BSI.GesMed.Interfaces.Agenda;
 import JFX.BSI.GesMed.Entidades.Agendamento;
 import JFX.BSI.GesMed.Entidades.Atendente;
 import JFX.BSI.GesMed.Entidades.Paciente;
+import JFX.BSI.GesMed.Entidades.Telefone;
 import JFX.BSI.GesMed.Repositorios.AgendamentoRepositorio;
 import JFX.BSI.GesMed.Repositorios.PacienteRepositorio;
 import com.jfoenix.controls.JFXButton;
@@ -62,7 +63,7 @@ public class MainAgendasController implements Initializable {
     @FXML
     private BorderPane rootGesMed;
     @FXML
-    private AnchorPane paneLateral, popUpMenu;
+    private AnchorPane paneLateral, popUpMenu, paneContactsEdit, paneContactsNew;
     @FXML
     private JFXButton btn_Menu, btn_ListaEspera, btnAtualizar;
     @FXML
@@ -108,19 +109,48 @@ public class MainAgendasController implements Initializable {
     private ObservableList<AgendamentoFX> agendamentosFX = FXCollections.observableArrayList();
     
     private Atendente atendente;
+   
+    @FXML
+    private JFXButton btn_Salvar;
+
+    @FXML
+    private JFXComboBox<String> cbxTipoContato;
+
+    @FXML
+    private JFXTextField tfdTelefone;
+
+    @FXML
+    private JFXComboBox<String> cbxStatus;
+    
+    private ObservableList<String> listStatusUpdate = FXCollections.observableArrayList("Selecione","Agendado","Confirmado","Chegou","Em Andamento","Finalizado","Cancelado","Faltou");
+    private ObservableList<String> listCelular = FXCollections.observableArrayList("Selecione","Celular","Telefone","Fixo","Trabalho");
+    
+    private MainAgendasController agenControl;
+    
     private Paciente paciente;
+    private List<Telefone> listTelefone;
+    
+    private Agendamento agenda;
+    
+    private AgendamentoRepositorio agenRep;
+    private PacienteRepositorio pacRep;
 
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       CarregarTabelaAgendamento();
+       
         inicializarComponentes();
+        agenRep = new AgendamentoRepositorio();
+        pacRep = new PacienteRepositorio();
+        
     }
     
     public void inicializarComponentes(){
         jcbStatus.setItems(listStatus);
         jcbStatus.setValue("");
+        
+        
     }
     
     
@@ -315,7 +345,13 @@ public class MainAgendasController implements Initializable {
         tblStatus.setMinWidth(200);
         tblStatus.setPrefWidth(200);
         tblStatus.setMaxWidth(300);
-       jcbStatus.valueProperty().addListener(new ChangeListener() {
+        tblStatus.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<AgendamentoFX, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<AgendamentoFX, String> param) {
+                return param.getValue().getValue().Status;
+            }
+        });
+        jcbStatus.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 
@@ -367,21 +403,26 @@ public class MainAgendasController implements Initializable {
     
     @FXML
     public void getAgendamentoSelectRow(MouseEvent event){
+        if(tblAgendamento.getSelectionModel().getSelectedIndex()>=0){
         TreeItem<AgendamentoFX> agenFX =  tblAgendamento.getSelectionModel().getSelectedItem();
         AgendamentoFX pacientefx = agenFX.getValue();
         PacienteRepositorio pRep = new PacienteRepositorio();
+        AgendamentoRepositorio agenRep = new AgendamentoRepositorio();
+        Paciente pacienteRec = pRep.recuperar(Integer.parseInt(pacientefx.IDPaciente.getValue()));
+        Agendamento agendaRec = agenRep.recuperar(Integer.parseInt(pacientefx.IDAgendamento.getValue()));
+        this.agenda = agendaRec;
+        this.paciente = pacienteRec;
+        openListTelefone();  
+        }
         
-        Paciente paciente = pRep.recuperar(Integer.parseInt(pacientefx.IDPaciente.getValue()));
-        this.paciente = paciente;
-        openListTelefone();
     }
     
+    @FXML
     public void openListTelefone(){
        
         FXMLLoader sceneMainPrincipal = new FXMLLoader(MainAgendasController.class.getResource("/JFX/BSI/GesMed/Interfaces/Agenda/ListContacts.fxml"));
-        ListContactsController listContatosControl = new ListContactsController(this.paciente);
         
-        sceneMainPrincipal.setController(listContatosControl);
+        sceneMainPrincipal.setController(this);
         
         try {
             paneListContatos = sceneMainPrincipal.load();
@@ -392,8 +433,6 @@ public class MainAgendasController implements Initializable {
         paneContacts.getChildren().clear();
         paneContacts.getChildren().add(paneListContatos);
         
-        
-        
         FadeTransition ft = new FadeTransition();
         ft.setNode(paneContacts);
         ft.setFromValue(0.1);
@@ -402,9 +441,126 @@ public class MainAgendasController implements Initializable {
         ft.setAutoReverse(false);
         ft.play();
         
-        listContatosControl.setInfoPhoneLabel();
+        if(tblAgendamento.getSelectionModel().getSelectedIndex()>=0){
+            setInfoPhoneLabel();
+        }
+        
         
     }
+    
+    @FXML
+    public void DisableButton(){
+        if(tblAgendamento.getSelectionModel().getSelectedIndex()<0){
+            btn_AddPhone.setDisable(true);
+        }else{
+            btn_AddPhone.setDisable(false);
+        }
+    }
+    
+    @FXML
+    public void openListTelefoneEdit(MouseEvent event){
+       
+        FXMLLoader sceneMainPrincipal = new FXMLLoader(MainAgendasController.class.getResource("/JFX/BSI/GesMed/Interfaces/Agenda/ListContactsEdit.fxml"));
+        sceneMainPrincipal.setController(this);
+        
+        try {
+            paneContactsEdit = sceneMainPrincipal.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainAgendasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        paneContacts.getChildren().clear();
+        paneContacts.getChildren().add(paneContactsEdit);
+        
+        
+        
+        FadeTransition ft = new FadeTransition();
+        ft.setNode(paneContactsEdit);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+        
+        cbxStatus.setItems(listStatusUpdate);
+        cbxTipoContato.setItems(listCelular);
+        cbxStatus.setValue(agenda.getStatus());
+    }
+    
+    @FXML
+    public void Salvar(MouseEvent event){
+       
+        System.out.println("Nome:"+paciente.getNome()+"\n CPF: "+paciente.getCPF());
+        System.out.println("Agendamento: "+agenda.getStatus());
+        
+        if(ValidationFields.checkEmptyFields(tfdTelefone)){
+        Telefone telefone = paciente.getTelefone();
+        
+        String Telefone=cbxTipoContato.getSelectionModel().getSelectedItem();
+        if(cbxTipoContato.getSelectionModel().getSelectedItem().equals("Celular")){
+            telefone.setCelular(Telefone);
+        }
+        if(cbxTipoContato.getSelectionModel().getSelectedItem().equals("Telefone")){
+            telefone.setCelular(Telefone);
+        }
+        if(cbxTipoContato.getSelectionModel().getSelectedItem().equals("Fixo")){
+            telefone.setCelular(Telefone);
+        }
+        if(cbxTipoContato.getSelectionModel().getSelectedItem().equals("Trabalho")){
+            telefone.setCelular(Telefone);
+        }
+        
+        paciente.setTelefone(telefone);
+        pacRep.atualizar(paciente);
+        }
+        
+        if(ValidationFields.checkEmptyFields(cbxStatus)){
+        String Status = cbxStatus.getSelectionModel().getSelectedItem();
+        agenda.setStatus(Status);
+        agenRep.atualizar(agenda); 
+        }
+        
+        CarregarTabelaAgendamento();
+        recarregarTabelaAgendamento();
+        openListTelefone();
+    }
+    
+    @FXML
+    public void tfdCelularKeyRelased(){
+        JFX.BSI.GesMed.Interfaces.Paciente.TextFieldFormatter tff = new JFX.BSI.GesMed.Interfaces.Paciente.TextFieldFormatter();
+        tff.setMask("(##)#####-####");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(tfdTelefone);
+        tff.formatter();
+    }
+    
+    @FXML
+    public void cancelarJanela(){
+        openListTelefone();
+    }
+    
+    public void setInfoPhoneLabel(){
+        if(paciente!=null){
+            
+                if(paciente.getTelefone().getCelular()!=null){
+                    infoPhonePessoal.setText(paciente.getTelefone().getCelular());
+                }
+              
+                if(paciente.getTelefone().getTelefone()!=null){
+                    infoPhoneRecado.setText(paciente.getTelefone().getTelefone());
+                }
+                
+                if(paciente.getTelefone().getFixo()!=null){
+                    infoPhoneFixo.setText(paciente.getTelefone().getFixo());
+                }
+                
+                if(paciente.getTelefone().getTrabalho()!=null){
+                    infoPhoneTrabalho.setText(paciente.getTelefone().getTrabalho());
+                }
+        }
+    }
+    
+    
     
     class AgendamentoFX extends RecursiveTreeObject<AgendamentoFX> {
         

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.MainPrincipalController">
+<StackPane fx:id="stackLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JFX.BSI.GesMed.Interfaces.LoginController">
    <children>
       <VBox fx:id="paneVBox" prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -30,7 +30,7 @@
                <children>
                   <AnchorPane layoutX="358.0" layoutY="103.0" prefHeight="461.0" prefWidth="399.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 3;">
                      <children>
-                        <JFXTextField fx:id="tfdLoginUser" labelFloat="true" layoutX="58.0" layoutY="167.0" maxWidth="297.0" minWidth="226.0" prefHeight="32.0" prefWidth="300.0" promptText="CPF do Usuário">
+                        <JFXTextField fx:id="tfdLoginUser" labelFloat="true" layoutX="58.0" layoutY="167.0" maxWidth="297.0" minWidth="226.0" onKeyReleased="#tfdCPFKeyRelased" prefHeight="32.0" prefWidth="300.0" promptText="CPF do Usuário">
                            <font>
                               <Font name="Roboto Light" size="14.0" />
                            </font>
@@ -40,7 +40,7 @@
                               <Font name="Roboto Light" size="14.0" />
                            </font>
                         </JFXPasswordField>
-                        <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="154.0" layoutY="307.0" onAction="#ValidaLogin" prefHeight="37.0" prefWidth="91.0" style="-fx-background-color: #00718A;" text="ENTRAR" textFill="WHITE">
+                        <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="69.0" layoutY="304.0" onAction="#ValidaLogin" prefHeight="37.0" prefWidth="101.0" style="-fx-background-color: #00718A;" text="ENTRAR" textFill="WHITE" AnchorPane.bottomAnchor="117.0">
                            <font>
                               <Font name="Roboto Bold" size="14.0" />
                            </font>
@@ -52,6 +52,11 @@
                         </ImageView>
                         <FontAwesomeIconView fx:id="iconTipoLogin" fill="#7387a8" glyphName="USER" layoutX="160.0" layoutY="74.0" size="80" wrappingWidth="68.99999678134918" />
                         <JFXComboBox fx:id="cbxTipoUser" layoutX="95.0" layoutY="103.0" prefHeight="32.0" prefWidth="200.0" promptText="TIPO DE USUÁRIO" />
+                        <JFXButton fx:id="btnRegistrar" layoutX="195.0" layoutY="304.0" onMouseClicked="#openAdministrador" prefHeight="40.0" prefWidth="150.0" text="REGISTRAR" textFill="#7387a8" AnchorPane.bottomAnchor="117.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                   <Label layoutX="401.0" layoutY="21.0" text="Gestão de Clínica Médica - GesMed" textFill="WHITE">
