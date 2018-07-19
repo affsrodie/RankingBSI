@@ -9,6 +9,8 @@ import javax.persistence.Query;
 import JFX.BSI.GesMed.Entidades.Paciente;
 import JFX.BSI.GesMed.Exception.DataBaseConstraintException;
 import java.math.BigDecimal;
+import javafx.scene.control.Alert;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
 
@@ -68,17 +70,31 @@ public class PacienteRepositorio {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Paciente> recuperarPacienteCPF(String CPF){
+	public Paciente recuperarPacienteCPF(String CPF){
+            Paciente p=null;
 		Query query = em.createQuery("SELECT p FROM Paciente p WHERE CPF='"+CPF+"'");
-		return query.getResultList();
+                try{
+                    p= (Paciente) query.getSingleResult(); 
+                }catch(NoResultException nre){
+                     Alert AlertErro = new Alert(Alert.AlertType.INFORMATION);
+                    AlertErro.setTitle("Busca de Paciente");
+                    AlertErro.setHeaderText("Busca de Paciente");
+                    AlertErro.setContentText("Paciante não encontrado");
+                    AlertErro.showAndWait();
+                }
+               
+		return p;
 	}
 	
 	public List<Paciente> recuperarPacientesNome(String Nome){
 		Query query = em.createQuery("SELECT p FROM Paciente p WHERE Nome like '%"+Nome+"%'");
 		return query.getResultList();
 	}
-	
-	
+        
+        public List<Paciente> recuperarPacientesCPF(String CPF){
+		Query query = em.createQuery("SELECT p FROM Paciente p WHERE CPF='"+CPF+"'");
+		return query.getResultList();
+	}
 	
 	public void encerrar(){
 		em.close();

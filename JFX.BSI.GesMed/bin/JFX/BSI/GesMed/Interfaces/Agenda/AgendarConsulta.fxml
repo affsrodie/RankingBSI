@@ -88,34 +88,7 @@
    <left>
       <VBox prefHeight="432.0" prefWidth="163.0" style="-fx-background-color: #fff;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="433.0" prefWidth="150.0">
-               <children>
-                  <JFXButton fx:id="btn_GradeHorario" alignment="TOP_LEFT" layoutX="5.0" layoutY="26.0" prefHeight="39.0" prefWidth="154.0" text="Grade de Horário">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/Search%20Property_30px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton alignment="TOP_LEFT" layoutX="6.0" layoutY="78.0" prefHeight="39.0" prefWidth="153.0" text="Configurações">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/Timer_30px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </AnchorPane>
+            <AnchorPane prefHeight="433.0" prefWidth="150.0" />
          </children>
       </VBox>
    </left>

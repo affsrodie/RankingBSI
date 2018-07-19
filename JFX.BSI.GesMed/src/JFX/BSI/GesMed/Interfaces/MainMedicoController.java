@@ -5,45 +5,25 @@
  */
 package JFX.BSI.GesMed.Interfaces;
 
-import JFX.BSI.GesMed.Entidades.Atendente;
 import JFX.BSI.GesMed.Entidades.Medico;
-import JFX.BSI.GesMed.Repositorios.AgendamentoRepositorio;
-import JFX.BSI.GesMed.Repositorios.AtendenteRepositorio;
-import JFX.BSI.GesMed.Repositorios.MedicoRepositorio;
-import JFX.BSI.GesMed.Repositorios.PacienteRepositorio;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -56,8 +36,6 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
-import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -121,6 +99,8 @@ public class MainMedicoController implements Initializable {
     @FXML
     private JFXButton btn_Menu;
     
+    JFXPopup fXPopup;
+    
     private static JFXPopup staticJFXPopup;
     
     private Medico medicoUser;
@@ -161,17 +141,17 @@ public class MainMedicoController implements Initializable {
     private void openDialog(MouseEvent event) {
         popUpMenu.setDisable(false);
         popUpMenu.setVisible(true);
-        JFXPopup fXPopup = new JFXPopup();
+        fXPopup = new JFXPopup();
         fXPopup.setPopupContent(popUpMenu);
-        fXPopup.show(rootGesMed, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, 10, 45);
+        fXPopup.show(rootGesMed, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, 10, 10);
         staticJFXPopup = fXPopup;
     }
     
 
     
     @FXML
-    private void openAgendamentos(MouseEvent event) throws IOException, Exception {
-         openStage("/JFX/BSI/GesMed/Interfaces/Agenda/ListaEspera.fxml");
+    private void openListaEspera(MouseEvent event) throws IOException, Exception {
+         openStage("/JFX/BSI/GesMed/Interfaces/Consulta/ListaEspera.fxml");
     }
     
     @FXML
@@ -204,7 +184,35 @@ public class MainMedicoController implements Initializable {
             Logger.getLogger(MainAtendenteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    public void EncerrarSessao(MouseEvent event) {
         
-   
+        try {
+        rootPrincipal.getChildren().clear();
+        FXMLLoader sceneMainPrincipal = new FXMLLoader(MainAtendenteController.class.getResource("/JFX/BSI/GesMed/Interfaces/Login.fxml"));
+        
+        paneLogin = sceneMainPrincipal.load();
+        
+        rootPrincipal.getChildren().add(paneLogin);
+        
+        rootPrincipal.setPrefWidth(1100);
+        rootPrincipal.setPrefHeight(600);
+        rootPrincipal.setMaxSize(Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
+        
+        FadeTransition ft = new FadeTransition();
+        ft.setNode(paneLogin);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+        
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        popUpMenu.setVisible(false);
+        fXPopup.hide();
+    }
     
 }

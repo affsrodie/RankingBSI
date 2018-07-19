@@ -114,13 +114,13 @@ public class CadastrarPacienteController implements Initializable {
         boolean CamposValidosTextFild = false;
         CamposValidosTextFild = validTextField.checkEmptyFields(
                 tfdNome, tfdRG, tfdCPF, tfdTelefone, tfdEndereco, 
-                tfdBairro, tfdCEP,  tfdPlanoSaude);
+                tfdBairro, tfdCEP);
         System.out.println("CamposValidos TextField: "+CamposValidosTextFild);
         
-        boolean CamposValidosTextArea = false;
-        ValidationFields validTextArea = new ValidationFields();
-        CamposValidosTextArea = validTextArea.checkEmptyFields(textPSDescricao);
-        System.out.println("CamposValidos TextArea: "+CamposValidosTextArea);
+//        boolean CamposValidosTextArea = false;
+//        ValidationFields validTextArea = new ValidationFields();
+//        CamposValidosTextArea = validTextArea.checkEmptyFields(textPSDescricao);
+//        System.out.println("CamposValidos TextArea: "+CamposValidosTextArea);
         
         boolean CamposValidosComboBox = false;
         ValidationFields validComboBox = new ValidationFields();
@@ -128,7 +128,7 @@ public class CadastrarPacienteController implements Initializable {
         System.out.println("CamposValidos CheckBox: "+CamposValidosComboBox);
         
         System.out.println("CamposValidos antes de verificar: "+CamposValidos);
-        if(CamposValidosTextFild==false || CamposValidosTextArea==false || CamposValidosComboBox==false ){
+        if(CamposValidosTextFild==false ||  CamposValidosComboBox==false ){
             CamposValidos = false; 
         }
         System.out.println("CamposValidos após de verificar: "+CamposValidos);

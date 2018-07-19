@@ -18,7 +18,6 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +33,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -114,7 +112,7 @@ public class LoginController implements Initializable {
     } 
     
     public void inicializeLogin(){
-        imgProgress.setVisible(false);
+       
         cbxTipoUser.setItems(listTipoUser);
         cbxTipoUser.setValue("ATENDENTE");
         cbxTipoUser.valueProperty().addListener(new ChangeListener() {
@@ -154,7 +152,6 @@ public class LoginController implements Initializable {
    
     @FXML
     public void ValidaLogin(ActionEvent event){
-        imgProgress.setVisible(true);
         if(cbxTipoUser.getSelectionModel().getSelectedItem().equals("MÉDICO")&&!tfdLoginUser.getText().trim().equals("")){
             
                     if(validaMedico()){  
@@ -474,19 +471,7 @@ public class LoginController implements Initializable {
         if(QUANT_ATEND!=-1&&QUANT_MED!=-1){
             SOMA = QUANT_ATEND+QUANT_MED;
         }
-        if(SOMA==0){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        
-        alert.setTitle("Sistema de Login");
-        alert.setHeaderText("Mensagem para Usuários do Sistema");
-        alert.setContentText("Foi identificado que não há usuários registrados no Sistema, clique em OK para cadastrar um usuário");
-        
-        Alert AlertErro = new Alert(Alert.AlertType.ERROR);
-                AlertErro.setTitle("Sistema de Login");
-                AlertErro.setHeaderText("Mensagem para Usuários do Sistema");
-                AlertErro.setContentText("Foi identificado que não há usuários registrados no Sistema. Entre em contato com um Administrador para Registrar um Atendente no Sistema");
-                AlertErro.showAndWait();
-        }
+
     }
     
     @FXML

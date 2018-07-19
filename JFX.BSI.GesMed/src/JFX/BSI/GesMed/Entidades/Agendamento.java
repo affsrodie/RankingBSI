@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 @Entity
 public class Agendamento {
 	@Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int IDAgenda;
 	@Temporal(TemporalType.DATE)
         private Date Data;

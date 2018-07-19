@@ -39,17 +39,21 @@
                         </JFXToolbar>
                         <AnchorPane prefHeight="61.0" prefWidth="1100.0" style="-fx-background-color: #ffff;">
                            <children>
-                              <FontAwesomeIconView fx:id="iconUserLogin" fill="#7387a8" glyphName="USER" layoutX="14.0" layoutY="45.0" size="50" wrappingWidth="54.999990463256836" />
                               <Label fx:id="infoUsuario" layoutX="69.0" layoutY="10.0" text="Usuário" textFill="#5676c3">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
+                              <JFXButton fx:id="btn_Menu" accessibleRole="TEXT" contentDisplay="GRAPHIC_ONLY" layoutY="-1.0" onMouseClicked="#openDialog" prefHeight="59.0" prefWidth="55.0" text="MENU">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="iconUserLogin" fill="#7387a8" glyphName="USER" size="50" wrappingWidth="54.999990463256836" />
+                                 </graphic>
+                              </JFXButton>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="rootGesMed" VBox.vgrow="ALWAYS">
                            <children>
-                              <AnchorPane fx:id="popUpMenu" onMouseClicked="#openDialog" prefHeight="218.0" prefWidth="202.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.4cm;" visible="false">
+                              <AnchorPane fx:id="popUpMenu" onMouseClicked="#openDialog" prefHeight="80.0" prefWidth="202.0" style="-fx-background-color: #ffff; -fx-background-radius: 0.4cm;" visible="false">
                                  <children>
                                     <Label layoutX="55.0" layoutY="14.0" text="Outras" textFill="#0f73b5">
                                        <font>
@@ -57,7 +61,7 @@
                                        </font>
                                     </Label>
                                     <MaterialDesignIconView fx:id="btn_Menu12" fill="#0961b9" glyphName="VIEW_LIST" layoutX="14.0" layoutY="33.0" opacity="0.55" size="25" strokeDashOffset="9.0" strokeType="OUTSIDE" strokeWidth="6.0" wrappingWidth="31.0" />
-                                    <JFXButton fx:id="btnOptions" accessibleRole="TEXT" alignment="BOTTOM_LEFT" layoutX="11.0" layoutY="88.0" prefHeight="38.0" prefWidth="181.0" text="SAIR" textFill="#2c7cb5">
+                                    <JFXButton fx:id="btnOptions" accessibleRole="TEXT" alignment="BOTTOM_LEFT" layoutX="11.0" layoutY="35.0" onMouseClicked="#EncerrarSessao" prefHeight="38.0" prefWidth="181.0" text="ENCERRAR SESSÃO" textFill="#2c7cb5">
                                        <graphic>
                                           <MaterialDesignIconView fx:id="btn_Menu11" fill="#0961b9" glyphName="SETTINGS" opacity="0.55" size="30" strokeDashOffset="9.0" strokeType="OUTSIDE" strokeWidth="6.0" wrappingWidth="40.0" />
                                        </graphic>
@@ -108,7 +112,7 @@
                                                 </Pane>
                                              </children>
                                           </Group>
-                                          <Group fx:id="groupAgendamento" onMouseClicked="#openAgendamentos">
+                                          <Group fx:id="groupAgendamento" onMouseClicked="#openListaEspera">
                                              <children>
                                                 <Pane layoutX="6.0" layoutY="39.0" prefHeight="135.0" prefWidth="299.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
                                                    <children>
@@ -148,11 +152,6 @@
                                     <DropShadow />
                                  </effect>
                               </AnchorPane>
-                              <JFXButton fx:id="btn_Menu" accessibleRole="TEXT" contentDisplay="GRAPHIC_ONLY" layoutX="5.0" layoutY="5.0" onMouseClicked="#openDialog" prefHeight="53.0" prefWidth="46.0" text="MENU">
-                                 <graphic>
-                                    <MaterialDesignIconView fill="#7387a8" glyphName="MENU" size="40" wrappingWidth="38.000005185604095" />
-                                 </graphic>
-                              </JFXButton>
                            </children>
                         </AnchorPane>
                      </children>

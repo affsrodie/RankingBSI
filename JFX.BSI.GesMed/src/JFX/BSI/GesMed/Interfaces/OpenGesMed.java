@@ -5,12 +5,13 @@
  */
 package JFX.BSI.GesMed.Interfaces;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 /**
  *
@@ -18,12 +19,24 @@ import javafx.stage.StageStyle;
  */
 public class OpenGesMed extends Application {
     
+    FXMLLoader WecomeFXML = new FXMLLoader(TelaBoasVindasController.class.getResource("TelaBoasVindas.fxml"));
+    TelaBoasVindasController telaWecome = new TelaBoasVindasController();
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        WecomeFXML.setController(telaWecome);
+        Parent root = WecomeFXML.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        PauseTransition pauseTransition = new PauseTransition();
+        pauseTransition.setDuration(Duration.seconds(5));
+        pauseTransition.setOnFinished(ev -> {
+           telaWecome.openStage();
+
+        });
+        pauseTransition.play();
+        
     }
     
     /**

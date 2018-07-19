@@ -29,10 +29,12 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -44,7 +46,7 @@ import org.controlsfx.control.textfield.TextFields;
 public class AgendarConsultaController implements Initializable {
     
     @FXML
-    private BorderPane rootAgendarConsulta;
+    private StackPane rootAgendarConsulta;
     
     @FXML
     private JFXComboBox jcbProcedimento;
@@ -66,6 +68,9 @@ public class AgendarConsultaController implements Initializable {
 
     @FXML
     private JFXButton btnSalvar;
+    
+    @FXML
+    private JFXButton btn_Buscar;
 
     @FXML
     private JFXButton btnCancelar;
@@ -256,14 +261,12 @@ public class AgendarConsultaController implements Initializable {
         
     }
     
+    @FXML
     public void ProcurarPacientePorCPF(){
         
         Paciente paciente = null;
         PacienteRepositorio pRep = new PacienteRepositorio();
-        List<Paciente> searchPac = pRep.recuperarPacienteCPF(tfdCPF.getText().trim());
-        if(searchPac.size()==1){
-            paciente = searchPac.get(0);
-        }
+        Paciente searchPac = pRep.recuperarPacienteCPF(tfdCPF.getText().trim());
         
         if(paciente!=null)
         System.out.println("NOME DO PACIENTE:"+ paciente.getNome()+" \nCPF" +paciente.getCPF());
@@ -272,6 +275,8 @@ public class AgendarConsultaController implements Initializable {
           String NOME = paciente.getNome();
            tfdNome.setText(NOME);
            this.paciente = paciente;
+        }else{
+            System.err.println("Não encontrado Paciente");
         }
         
     }
@@ -346,5 +351,13 @@ public class AgendarConsultaController implements Initializable {
 //        
 //    }
     
+    @FXML
+    public void tfdCPFKeyRelased(){
+        JFX.BSI.GesMed.Interfaces.TextFieldFormatter tff = new JFX.BSI.GesMed.Interfaces.TextFieldFormatter();
+        tff.setMask("###.###.###-##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(tfdCPF);
+        tff.formatter();
+    }
     
 }

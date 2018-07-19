@@ -270,7 +270,7 @@ public class GerenciarPacientesController implements Initializable {
                     listPacientes = null;
                     pacientesfx = null;
                     listPacientes = new ArrayList<Paciente>();
-                    listPacientes = pRep.recuperarPacienteCPF(tfdFindNome.getText().trim());
+                    listPacientes = pRep.recuperarPacientesCPF(tfdFindNome.getText().trim());
                     ColumnTableFindPacientes();  
                     }else{
                     pacientesfx = null;    

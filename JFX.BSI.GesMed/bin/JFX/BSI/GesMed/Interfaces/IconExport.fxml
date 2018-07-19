@@ -21,5 +21,6 @@
             <Pane layoutX="-37.0" layoutY="11.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-radius: 1.5cm; -fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" />
          </children></Pane>
       <Pane layoutX="295.0" layoutY="265.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #ffff; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" />
+      <FontAwesomeIconView fill="#7387a8" glyphName="EXTERNAL_LINK" layoutY="103.0" size="20" wrappingWidth="28.999996781349182" />
    </children>
 </AnchorPane>

@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -46,11 +48,13 @@ public class MainAtendenteController implements Initializable {
     private StackPane rootPrincipal;
     
     @FXML
+    private StackPane paneLogin;
+    
+    @FXML
     private AnchorPane rootGesMed, popUpMenu;
     
     @FXML
     private FontAwesomeIconView iconUserLogin;
-    
 
     @FXML
     private Label infoUsuario;
@@ -72,6 +76,11 @@ public class MainAtendenteController implements Initializable {
     
     @FXML
     private JFXButton btn_Menu;
+    
+    @FXML
+    private JFXButton btnLogoff;
+    
+    JFXPopup fXPopup;
     
     private static JFXPopup staticJFXPopup;
     
@@ -120,7 +129,7 @@ public class MainAtendenteController implements Initializable {
     private void openDialog(MouseEvent event) {
         popUpMenu.setDisable(false);
         popUpMenu.setVisible(true);
-        JFXPopup fXPopup = new JFXPopup();
+        fXPopup = new JFXPopup();
         fXPopup.setPopupContent(popUpMenu);
         fXPopup.show(rootGesMed, JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT, 10, 45);
         staticJFXPopup = fXPopup;
@@ -178,7 +187,37 @@ public class MainAtendenteController implements Initializable {
             Logger.getLogger(MainAtendenteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    public void EncerrarSessao(MouseEvent event) {
         
-   
+        try {
+        rootPrincipal.getChildren().clear();
+        FXMLLoader sceneMainPrincipal = new FXMLLoader(MainAtendenteController.class.getResource("/JFX/BSI/GesMed/Interfaces/Login.fxml"));
+        
+        paneLogin = sceneMainPrincipal.load();
+        
+        rootPrincipal.getChildren().add(paneLogin);
+        
+        rootPrincipal.setPrefWidth(1100);
+        rootPrincipal.setPrefHeight(600);
+        rootPrincipal.setMaxSize(Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
+        
+        FadeTransition ft = new FadeTransition();
+        ft.setNode(paneLogin);
+        ft.setFromValue(0.1);
+        ft.setToValue(1);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(false);
+        ft.play();
+        
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        popUpMenu.setVisible(false);
+        fXPopup.hide();
+    }
+    
+ 
     
 }
